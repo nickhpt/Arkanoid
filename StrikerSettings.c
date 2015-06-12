@@ -4,14 +4,7 @@
 #include "mathfix.h"
 #include "GameSettingsh"
 
-// structure for striker
-struct striker_t{
-	char lftend, rghtend;								//The different zones of the striker
-	char xpos,ypos;										//leftend, leftmid, central, rightmid, rigthend
-	char points;
-	char lives;
 
-}
 
 void setStriker(struct striker_t *striker_p, char xpos1, char ypos1) {
 	striker_p -> xpos = xpos1;
