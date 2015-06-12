@@ -7,8 +7,8 @@
 
 struct box_t{ 
 	char x1,y1;
-	char length;
-	char width;
+	char x2;
+	char y2;
 	char pwrup;
 	char hp;
 };
@@ -19,8 +19,8 @@ void setpwr(struct box_t *box_p) {
 } 
 
 void setBox(struct box_t *box_p) {
-		box_p ->length = 3;
-		box_p -> width = 1;
+		box_p ->x2 = 3;
+		box_p -> y2 = 1;
 		box_p -> hp = 2;
 		setpwr(box_p);
 		
