@@ -4,10 +4,9 @@
 
 struct box_t{ 
 	char x1,y1,x2,y2;
-	char length;
-	char width;
 	char pwrup;
 	char hp;
+	char boxpoint;
 };
 
 
@@ -18,7 +17,7 @@ struct striker_t{
 
 void setpwr(struct box_t *box_p);
 
-void setBox(struct box_t *box_p, char hp1, char point);
+void setBox(struct box_t *box_p, char xpos1, char ypos1,  char xpos2, char ypos2, char hp1, char point);
 
 void changehp(struct box_t *box_p, char change);
 
