@@ -1,6 +1,7 @@
 #include <eZ8.h>             // special encore constants, macros and flash routines
 #include <sio.h>             // special encore serial i/o routine
-#include <string.h>		        // For strlen() function
+#include <string.h>		     // For strlen() function 
+
 #include "ansi.h"
  
 #define ESC 0x1B
@@ -65,13 +66,12 @@ void resetbgcolor() {
 void clrscr() { //clear screen
 	printf("%c[2J",ESC);
 }
- 
- 
+  
 void clreol() { //clear to end of line
 	printf("%c[K",ESC);
 }
  
-void gotoxy(char x, char y) { //moves cursor to coordinates
+void gotoxy(char x, char y) {
 	printf("%c[%d;%dH",ESC,x,y);
 }
  
@@ -112,7 +112,7 @@ void window(char x1, char y1, char x2, char y2, char* s, char style) {//Draws a 
 	}
 	reverse(0);
 	printf("%c%c",195,191);
-	for(i = 1; i < x2; i++) {
+	for(i = 1; i < (x2-x1); i++) {
 	   	gotoxy(x1 + i, y1);
 	   	printf("%c",179);
 	   	gotoxy(x1 + i, y2);
@@ -134,7 +134,7 @@ void drawsBoxX4(char x1,char y1,char x2, char y2) {
 		printf("%c",196);
 	}
 	printf("%c",191);
-	for(i = 1; i =< x2; i++) {
+	for(i = 1; i <= x2; i++) {
 		gotoxy(x1 + i, y1);
 	   	printf("%c",179);
 	   	gotoxy(x1 + i, y2);
@@ -156,11 +156,11 @@ void drawBox(char x1, char y1, char x2, char y2, char color) {
 		fgcolor(1);
 	gotoxy(x1,y1);
 	printf("%c",218);
-	for(i = y1 + 1; i < length; i++) {
+	for(i = y1 + 1; i < y2; i++) {
 		printf("%c",196);
 	}
-		printf("%c",191);
-	for(i = 1; i < x2; i++) {
+	printf("%c",191);
+	for(i = 1; i < (x2-x1); i++) {
 		gotoxy(x1 + i, y1);
 	   	printf("%c",179);
 	   	gotoxy(x1 + i, y2);
@@ -168,8 +168,16 @@ void drawBox(char x1, char y1, char x2, char y2, char color) {
 	}
 	gotoxy(x2,y1);
 	printf("%c",192);
-	for(i = y1; i < y2; i++) {
+	for(i = y1; i < y2-1; i++) {
 		printf("%c",196);
 	}
 	printf("%c",217);
+}
+
+void drawLine(char x1, char y1, char y2) {
+	char i;
+    gotoxy(x1,y1);
+	for(i = y1; i < y2; i++) {
+		printf("%c",196);
+	}
 }
