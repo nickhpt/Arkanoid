@@ -1,5 +1,6 @@
 #include <eZ8.h>
 #include <sio.h>
+#include "ansi.h"
 
 struct box_t{ 
 	char x1,y1,x2,y2;
@@ -12,7 +13,7 @@ struct box_t{
 
 struct striker_t{
 	char lftend, rghtend;								//The different zones of the striker
-	char xpos,ypos;									//leftend, leftmid, central, rightmid, rigthend
+	char xpos,ypos;										//leftend, leftmid, central, rightmid, rigthend
 }; 
 
 void setpwr(struct box_t *box_p);
