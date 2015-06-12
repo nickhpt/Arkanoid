@@ -29,7 +29,7 @@ void setBox(struct box_t *box_p, char hp1, char point) {
 		
 } 
 
-void changehp(struct box_t *box_p) {
-	box_p->hp--;
+void changehp(struct box_t *box_p, char change) {
+	box_p->hp += change;
 	
 }
