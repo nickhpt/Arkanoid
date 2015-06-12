@@ -6,7 +6,7 @@
 #include "GameSettings.h"
 
 struct box_t{ 
-	char x1,y1,x2,y2;
+	char x1,y1;
 	char length;
 	char width;
 	char pwrup;
