@@ -5,14 +5,7 @@
 #include "charset.h"
 #include "GameSettings.h"
 
-struct box_t{ 
-	char x1,y1;
-	char length;
-	char width;
-	char pwrup;
-	char hp;
-	char boxpoint;
-};
+
 
 void setpwr(struct box_t *box_p) {
 	box_p -> pwrup = 0;
