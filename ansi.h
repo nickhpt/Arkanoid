@@ -10,7 +10,7 @@ void color(int foreground, int background);
  
 void resetbgcolor();
 void clrscr();
-void gotoxy(int x, int y);
+void gotoxy(char x, char y);
 void underline(char on);
 void reverse(char on);
 void blink(char on);
