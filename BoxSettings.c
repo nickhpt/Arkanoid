@@ -26,3 +26,19 @@ void changehp(struct box_t *box_p, char change) {
 	box_p->hp += change;
 	
 }
+
+void changeBox(struct *Box Box){
+	gotoxy(Box.x,Box.y);
+	if(box.hp == 0){
+		fgcolor(x);
+	}
+	if(box.hp == 1){
+		fgcolor(x);
+	}
+	if(box.hp==2){
+		fgcolor(x)
+	}
+	}
+	}
+	}
+}
