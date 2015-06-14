@@ -29,14 +29,17 @@ void changehp(struct box_t *box_p, char change) {
 
 void changeBox(struct *Box Box){
 	gotoxy(Box.x,Box.y);
-	if(box.hp == 0){
-		fgcolor(x);
-	}
 	if(box.hp == 1){
 		fgcolor(x);
+		//print box med 1 liv
 	}
-	if(box.hp==2){
+	if(box.hp == 2){
+		fgcolor(x);
+		//print box med 2 liv
+	}
+	if(box.hp==3){
 		fgcolor(x)
+		//print box med 3 liv
 	}
 	}
 	}
