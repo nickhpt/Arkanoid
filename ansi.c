@@ -209,3 +209,13 @@ void clearBox(char x1, char y1, char x2, char y2) {
 		printf(" ");
 	}
 }
+
+
+void drawBall(char ball.x1,char ball.y1,char ball.x, char ball.y){
+	gotoxy(ball.x1,ball.y1);
+	printf(" "); //Draws nothing @ old position
+	gotoxy(ball.x,ball.y)
+	printf("%c",111); //Draws ansicode for a ball
+{
+
+
