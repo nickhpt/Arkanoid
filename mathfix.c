@@ -177,7 +177,7 @@ int width = 2;
 			for (i = 0; i < heigth; i++){
 				gotoxy(box -> x1,box -> y+i)
 				for (j = 0; j < width; j++) {
-					printf(" "); //Tegn ingen ting hvis ikke der nogen liv 
+					printf(" "); //Tegn ingenting hvis ikke der nogen liv 
 				}
 			}
 		}
