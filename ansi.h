@@ -18,3 +18,4 @@ void drawBox(char x1, char y1, char x2, char y2, char color);
 void drawLine(char y1, char x1, char x2);
 void clearLine(char y1, char x1, char x2);
 void clearBox(char x1, char y1, char x2, char y2);
+void drawBall(char ball.x1,char ball.y1,char ball.x, char ball.y)
