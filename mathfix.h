@@ -22,7 +22,9 @@ long sin(int n);
 long cos(int n);
 struct Ball{
        long x;
-	   long y;
+       long y;
+       long x1;
+       long y1;
 
 	   struct TVector v;
 	  
