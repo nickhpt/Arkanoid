@@ -1,10 +1,3 @@
-// =====================================================================
-//
-//  Exported by Cearn's excellut v1.0
-//  (comments, kudos, flames to daytshen@hotmail.com)
-//
-// =====================================================================
- 
 #ifndef mathFix_H
 #define mathFix_H
  
@@ -21,7 +14,16 @@ struct TVector {
 };
  
 void rotate(struct TVector *v, int n);
+void reflectBallSides(struct TVector *v,int n);
+void reflectBallTop(struct TVector *v,int n);
 long expand(long i);
 void printFix(long i);
 long sin(int n);
 long cos(int n);
+struct Ball{
+       long x;
+	   long y;
+
+	   struct TVector v;
+	  
+};
