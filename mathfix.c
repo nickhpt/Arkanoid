@@ -161,3 +161,23 @@ void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
 		progressBall(ball);
 		checkWallCollision(ball,xmin,xmax,ymax,ymin);
 }
+//--------
+void createBox(box_t * box){ //Begyndelsen på createBox
+int height = 4;
+int width = 2;
+	if (box -> hp != 0){
+	    for (int i = 0; i <= heigth; i++){
+		     gotoxy(box -> x1, box -> y1+i); // gennemløber en side i boxen
+			 for (j = 0; j < width; j++){
+			 //printf tegn kassen tegnet "|" kan evt bruges? eller en tilsvarende ANSI
+			 	}
+			}
+	  }else{
+ 	  	if(box -> hp <= 0){
+			for (i = 0; i < heigth; i++){
+				gotoxy(box -> x1,box -> y+i)
+				for (j = 0; j < width; j++) {
+					printf(" "); //Tegn ingen ting hvis ikke der nogen liv 
+				}
+			}
+		}
