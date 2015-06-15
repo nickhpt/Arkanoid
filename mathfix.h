@@ -12,20 +12,20 @@ extern const signed short SIN[512];
 struct TVector {
       long x, y;
 };
+
+struct Ball {
+       long x;
+	   long y;
+	   struct TVector v;
+};
  
 void rotate(struct TVector *v, int n);
-void reflectBallSides(struct TVector *v,int n);
-void reflectBallTop(struct TVector *v,int n);
+void reflectBallSides(struct TVector *v);
+void reflectBallTop(struct TVector *v);
 long expand(long i);
 void printFix(long i);
 long sin(int n);
 long cos(int n);
-struct Ball{
-       long x;
-       long y;
-       long x1;
-       long y1;
-
-	   struct TVector v;
-	  
-};
+void progressBall(struct Ball *ball);
+void checkWallCollision(struct Ball* ball,char xmin, char ymin, char xmax, char ymax );
+void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax );
