@@ -122,7 +122,7 @@ void reflectBallSides(struct TVector *v, int n){
      long x1 = v->x;
 	 long y1 = v->y;
 	 v->x = -x1;  
-     v->y = y1;
+         v->y = y1;
 }
 //Metode til at reflektere bolden fra toppen 
 void reflectBallTop(struct TVector *v, int n){
