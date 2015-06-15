@@ -103,7 +103,7 @@ void window(char x1, char y1, char x2, char y2, char* s, char style) {//Draws a 
 	char i;
 	char n = strlen(s);
 	gotoxy(x1,y1);
-	color(0,15);
+	color(0,15);																																				   
 	printf("%c%c",218,180);
 	reverse(1);
 	printf("%s",s);
@@ -177,7 +177,7 @@ void drawBox(char x1, char y1, char x2, char y2, char color) {
 
 void drawLine(char y1, char x1, char x2) {
 	char i;
-    gotoxy(x1,y1);
+    gotoxy(y1,x1);
 	for(i = x1; i <= x2; i++) {
 		printf("%c",196);
 	}
@@ -185,7 +185,7 @@ void drawLine(char y1, char x1, char x2) {
 
 void clearLine(char y1, char x1, char x2) {
 	char i;
-	gotoxy(x1,y1);
+	gotoxy(y1,x1);
 	for(i = x1; i <= x2; i++) {
 		printf(" ");
 	}
@@ -193,7 +193,7 @@ void clearLine(char y1, char x1, char x2) {
 
 void clearBox(char x1, char y1, char x2, char y2) {
 	char i;
-	gotoxy(x1,y1);
+	gotoxy(y1,x1);
 	for(i = y1; i <= y2; i++) {
 		printf(" ");
 	}
@@ -209,13 +209,3 @@ void clearBox(char x1, char y1, char x2, char y2) {
 		printf(" ");
 	}
 }
-
-
-void drawBall(char ball.x1,char ball.y1,char ball.x, char ball.y){
-	gotoxy(ball.x1,ball.y1);
-	printf(" "); //Draws nothing @ old position
-	gotoxy(ball.x,ball.y)
-	printf("%c",111); //Draws ansicode for a ball
-{
-
-
