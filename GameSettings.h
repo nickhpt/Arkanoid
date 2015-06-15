@@ -12,7 +12,9 @@ struct box_t{
 
 struct striker_t{
 	char lftend, rghtend;								//The different zones of the striker
-	char xpos,ypos;										//leftend, leftmid, central, rightmid, rigthend
+	char ypos;
+	char points;
+	char lives;										//leftend, leftmid, central, rightmid, rigthend
 }; 
 
 void setpwr(struct box_t *box_p);
@@ -21,10 +23,13 @@ void setBox(struct box_t *box_p, char xpos1, char ypos1,  char xpos2, char ypos2
 
 void changehp(struct box_t *box_p, char change);
 
-void setStriker(struct striker_t *striker_p, char xpos1, char ypos1);
+void setStriker(struct striker_t *striker_p, char xpos1, char xpos2, char ypos1);
 
 void moveStriker(struct striker_t *striker_p, char direction); 
 
 void changelives(struct striker_t *striker_p);
 
 void scorepoints(struct striker_t *striker_p, char point);
+
+
+void update_striker(struct striker_t * striker_p, char x1_wall, char x2_wall);
