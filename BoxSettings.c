@@ -35,7 +35,7 @@ void changeBox(struct *Box Box){
 	}
 	if(box.hp == 2){
 		fgcolor(x);
-		//print box med 2 liv
+		//print box med 2 liv 
 	}
 	if(box.hp==3){
 		fgcolor(x)
