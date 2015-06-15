@@ -9,6 +9,7 @@
 #include <eZ8.h>             // special encore constants, macros and flash routines
 #include <sio.h>             // special encore serial i/o routine
 #include "mathFix.h"
+#include "ansi.h"
 // -----------------------------------------------------------------------
 // SIN: a 512 long LUT of 16bit values in 2.14 format
 // sin(x*pi/256)
@@ -118,45 +119,45 @@ void rotate(struct TVector *v, int n) {
 }
 
 //Metode til at reflektere bolden fra en side
-void reflectBallSides(struct TVector *v, int n){
-     long x1 = v->x;
-	 long y1 = v->y;
-	 v->x = -x1;  
-         v->y = y1;
+void reflectBallSides(struct TVector *v) {    
+	 v->x = -v->x; 
 }
 //Metode til at reflektere bolden fra toppen 
-void reflectBallTop(struct TVector *v, int n){
-	long x1 = v->x;
-	long y1 = v->y;
-	v->x = x1;
-	v->y = y1;
+void reflectBallTop(struct TVector *v) {   
+	v->y = -v->y;
 }
 
+void progressBall(struct Ball *ball) {
+	long x1;
+	long y1;
+	gotoxy(ball->x,ball->y);
+	printf(" ");
+	x1 = ball->x;
+	y1 = ball->y;
+	ball->x = x1 + ball->v.x;
+	ball->y = y1 + ball->v.y;
+	gotoxy(ball->x,ball->y);
+	printf("o");
+}
 
 
 
 // checking for ball collision with wall and ceiling
-void checkWallCollision(struct Ball* ball) {
+void checkWallCollision(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
 
-	// Venstre væg
-	if (ball->x < (xmin) {
-       reflectBallSides(ball.v);
-		
-	}
-	// Højre væg
-	else if (ball->x > (xmax)) {
-		reflectBallSides(ball.v);
-	}
-
-	// Øverste væg
-	if (ball->y < (ymax)) {
-		reflectBallTop(ball.v);
-	}
-
-	else if (ball->y > (( tabskriterie))) { 
-		// Der mistes et liv, hvis kriteriet opfyldes -- Tabskriteret er når y < y_striker_min
-		//player.hp -- 
+	// Venstre vÃ¦g
+	if ( !(((ball->x + ball->v.x) > (xmin)) && ((ball->x + ball->v.x) < (xmax))) ) {
+       reflectBallSides(&(ball->v));
 		
 	}
 
+	// Ã˜verste vÃ¦g
+	if ( !(((ball->y + ball->v.y) > (ymax)) && ((ball->y + ball->v.y) < ( ymin))) ) {
+		reflectBallTop(&(ball->v));
+	}
+}
+
+void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
+		progressBall(ball);
+		checkWallCollision(ball,xmin,xmax,ymax,ymin);
 }
