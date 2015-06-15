@@ -114,4 +114,49 @@ void rotate(struct TVector *v, int n) {
     long y1 = v->y;
     v->x = x1*cos(n) - y1*sin(n);
     v->y = x1*sin(n) + y1*cos(n);
+
+}
+
+//Metode til at reflektere bolden fra en side
+void reflectBallSides(struct TVector *v, int n){
+     long x1 = v->x;
+	 long y1 = v->y;
+	 v->x = -x1;  
+     v->y = y1;
+}
+//Metode til at reflektere bolden fra toppen 
+void reflectBallTop(struct TVector *v, int n){
+	long x1 = v->x;
+	long y1 = v->y;
+	v->x = x1;
+	v->y = y1;
+}
+
+
+
+
+// checking for ball collision with wall and ceiling
+void checkWallCollision(struct Ball* ball) {
+
+	// Venstre væg
+	if (ball->x < (xmin) {
+       reflectBallSides(ball.v);
+		
+	}
+	// Højre væg
+	else if (ball->x > (xmax)) {
+		reflectBallSides(ball.v);
+	}
+
+	// Øverste væg
+	if (ball->y < (ymax)) {
+		reflectBallTop(ball.v);
+	}
+
+	else if (ball->y > (( tabskriterie))) { 
+		// Der mistes et liv, hvis kriteriet opfyldes -- Tabskriteret er når y < y_striker_min
+		//player.hp -- 
+		
+	}
+
 }
