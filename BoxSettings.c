@@ -27,7 +27,7 @@ void changehp(struct box_t *box_p, char change) {
 	
 }
 
-void changeBox(struct *Box Box){
+void changeBox(struct *Box Box) {
 	gotoxy(Box.x,Box.y);
 	if(box.hp == 1){
 		fgcolor(x);
@@ -37,7 +37,7 @@ void changeBox(struct *Box Box){
 		fgcolor(x);
 		//print box med 2 liv 
 	}
-	if(box.hp==3){
+	if(box.hp==3) {
 		fgcolor(x)
 		//print box med 3 liv
 	}
@@ -45,3 +45,25 @@ void changeBox(struct *Box Box){
 	}
 	}
 }
+
+/*
+void createBox(box_t * box) { //Begyndelsen på createBox
+int height = 4;
+int width = 2;
+	if (box -> hp != 0) {
+	    for (int i = 0; i <= heigth; i++) {
+		     gotoxy(box -> x1, box -> y1+i); // gennemløber en side i boxen
+			 for (j = 0; j < width; j++) {
+			 //printf tegn kassen tegnet "|" kan evt bruges? eller en tilsvarende ANSI
+			 	}
+			}
+	  }else{
+ 	  	if(box -> hp <= 0) {
+			for (i = 0; i < heigth; i++) {
+				gotoxy(box -> x1,box -> y+i)
+				for (j = 0; j < width; j++) {
+					printf(" "); //Tegn ingenting hvis ikke der nogen liv 
+				}
+			}
+		}
+*/
