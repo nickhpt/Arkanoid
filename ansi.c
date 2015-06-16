@@ -71,7 +71,7 @@ void clreol() { //clear to end of line
 	printf("%c[K",ESC);
 }
  
-void gotoxy(char x, char y) {
+void gotoxy(unsigned char x,unsigned char y) {
 	printf("%c[%d;%dH",ESC,x,y);
 }
  
@@ -126,8 +126,9 @@ void window(char x1, char y1, char x2, char y2, char* s, char style) {//Draws a 
 	printf("%c",217);
 }
 
-void drawBoxX4(char x1,char y1,char x2, char y2) {
-	char i;
+void drawBoxX4(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2) {
+	unsigned char i;
+	bgcolor(0);
 	gotoxy(x1,y1);
 	printf("%c",218);
 	for(i = y1 + 1; i < y2; i++) {
@@ -142,8 +143,8 @@ void drawBoxX4(char x1,char y1,char x2, char y2) {
 	}
 }
 
-void drawBox(char x1, char y1, char x2, char y2, char color) {
-	char i;
+void drawBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y2,unsigned char color) {
+	unsigned char i;
 	if(color == 5) 
 		fgcolor(4);
     else if(color == 4)
@@ -175,24 +176,26 @@ void drawBox(char x1, char y1, char x2, char y2, char color) {
 	fgcolor(0);
 }
 
-void drawLine(char y1, char x1, char x2) {
-	char i;
+void drawLine(unsigned char y1,unsigned char x1,unsigned char x2) {
+	unsigned char i;
+	bgcolor(4);
     gotoxy(y1,x1);
 	for(i = x1; i <= x2; i++) {
-		printf("%c",196);
+		printf("%c",32);
 	}
 }
 
-void clearLine(char y1, char x1, char x2) {
-	char i;
+void clearLine(unsigned char y1,unsigned char x1, unsigned char x2) {
+	unsigned char i;
 	gotoxy(y1,x1);
+	bgcolor(0);
 	for(i = x1; i <= x2; i++) {
 		printf(" ");
 	}
 }
 
-void clearBox(char x1, char y1, char x2, char y2) {
-	char i;
+void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y2) {
+	unsigned char i;
 	gotoxy(y1,x1);
 	for(i = y1; i <= y2; i++) {
 		printf(" ");
