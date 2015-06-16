@@ -10,19 +10,22 @@
 
 
 void main() {
-
+	#define ESC 0x1B
 	struct striker_t striker;
 
-	char wallx1 = 1;
-	char wallx2 = 127;
-	char left = 30;
-	char right = 34;
-	char yposs = 78;
+	struct box_t box1;
+
+	unsigned char wallx1 = 1;
+	unsigned char wallx2 = 250;
+	unsigned char left = 30;
+	unsigned char right = 34;
+	unsigned char yposs = 78;
 
 	setTimer();
 	
 	init_uart(_UART0,_DEFFREQ,_DEFBAUD);
 	
+	printf("%c[?25l", ESC);
 	clrscr();	
 	drawBoxX4(1,wallx1,yposs, wallx2); 
 	drawLine(yposs, left, right);
