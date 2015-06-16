@@ -109,15 +109,17 @@ long sin(int n) {
 long cos(int n) {
     return sin(n + 0x0080);
 }
+
+void changeDirection(struct TVector *v, int n) {
+	v->x = sin(n);
+	v->y = cos(n);
+}
  
 void rotate(struct TVector *v, int n) {
     long x1 = v->x;
     long y1 = v->y;
-    v->x = x1*cos(n) - y1*sin(n);
-    v->y = x1*sin(n) + y1*cos(n);
-	v->x = round(v->x);
-	v->y = round(v->y);
-
+    v->x = x1*sin(n) - y1*cos(n);
+    v->y = x1*cos(n) + y1*sin(n);  
 }
 
 //Metode til at reflektere bolden fra en side
@@ -129,37 +131,67 @@ void reflectBallTop(struct TVector *v) {
 	v->y = -v->y;
 }
 
-void progressBall(struct Ball *ball) {
-	long x1;
-	long y1;
-	gotoxy(ball->x,ball->y);
+void progressBall(struct Ball *ball) { 
+	gotoxy(round(ball->x) >> 2,round(ball->y) >> 2);
 	printf(" ");
-	x1 = ball->x;
-	y1 = ball->y;
-	ball->x = x1 + ball->v.x;
-	ball->y = y1 + ball->v.y;
-	gotoxy(ball->x,ball->y);
+	ball->x= ball->x + sin(ball->angle);
+	ball->y= ball->y + cos(ball->angle);  
+	gotoxy(round(ball->x) >> 2,round(ball->y) >> 2);
 	printf("o");
 }
 
 long round(long n) {
-	n = expand(n);
+	//n = expand(n);
 	n = (n + 0x8000) >> 16;
 	return n;
 }
+
+void reflectBallRSidefromBelow(struct Ball *ball) {
+	int n = 512 - ball->angle;
+	ball->angle = 256 + n;
+	changeDirection(&(ball->v),ball->angle);	
+}
+
+void reflectBallRSidefromAbove(struct Ball *ball) {
+	ball->angle = 256 - ball->angle;
+	changeDirection(&(ball->v),ball->angle);
+}
+
+void reflectBallLSidefromBelow(struct Ball *ball) {
+	int n = ball->angle - 256;
+	ball->angle = 512 - n;
+	changeDirection(&(ball->v),ball->angle);
+}
+
+void reflectBallLSidefromAbove(struct Ball *ball) {
+	ball->angle = 256 - ball->angle;
+	changeDirection(&(ball->v),ball->angle);
+}
+
+void reflectBallTopfromRight(struct Ball *ball) {
+	int n = ball->angle - 256;
+	ball->angle = 256 - n;
+	changeDirection(&(ball->v),ball->angle);
+}
+
+void reflectBallTopfromLeft(struct Ball *ball) {
+	ball->angle = ball->angle - 384;
+    changeDirection(&(ball->v),ball->angle);
+}
+
 
 
 
 // checking for ball collision with wall and ceiling
 void checkWallCollision(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
 
-	// Venstre vÃ¦g
+	// Venstre vÃƒÂ¦g
 	if ( !(((ball->x + ball->v.x) > (xmin)) && ((ball->x + ball->v.x) < (xmax))) ) {
        reflectBallSides(&(ball->v));
 		
 	}
 
-	// Ã˜verste vÃ¦g
+	// ÃƒËœverste vÃƒÂ¦g
 	if ( !(((ball->y + ball->v.y) > (ymax)) && ((ball->y + ball->v.y) < ( ymin))) ) {
 		reflectBallTop(&(ball->v));
 	}
