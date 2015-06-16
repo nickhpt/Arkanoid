@@ -15,6 +15,25 @@ void setStriker(struct striker_t *striker_p, char xpos1, char xpos2, char ypos1)
 	printf("dfdfdf");
 }
 
+void initStriker(struct striker_t * striker_p, char xpos1, char xpos2, char ypos1) {
+	striker_p -> ypos = ypos1;
+	striker_p -> points = 0;
+	striker_p -> lives = 3;
+	striker_p -> lftend = xpos1;
+	striker_p -> lftmid = striker_p -> lftend +1;
+	striker_p -> center = striker_p -> lftend + 2;
+	striker_p -> rghtmid = striker_p -> rghtend -1;
+	striker_p -> rghtend = xpos2;
+}
+
+void change_striker(struct striker_t * striker_p, char xpos1, char xpos2) {
+	striker_p -> lftend = xpos1;
+	striker_p -> rghtend = xpos2;
+	striker_p -> lftmid = striker_p -> lftend +1;
+	striker_p -> center = striker_p -> lftend + 2;
+	striker_p -> rghtmid = striker_p -> rghtend -1; 
+}
+
 void moveStriker(struct striker_t *striker_p, char direction) { 
 	striker_p -> lftend += direction;
 	striker_p -> rghtend += direction;
@@ -35,16 +54,18 @@ void update_striker(struct striker_t * striker_p, char x1_wall, char x2_wall) {
 		char direction = 0;
 		char check = readKey();
 	
-		if(check == 4 && !(striker_p->lftend == x1_wall)) {
+		if(check == 4 && !(striker_p->lftend == x1_wall+1)) {
 			clearLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend);
 			direction--;
 			moveStriker(striker_p, direction);
-			drawLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend); 
+			change_striker(striker_p, striker_p->lftend, striker_p->rghtend);
+			drawLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend);
 		}
-		if(check == 1 && !(striker_p->rghtend == x2_wall)) {
+		if(check == 1 && !(striker_p->rghtend == x2_wall-1)) {
 			clearLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend);
 			direction++;
 			moveStriker(striker_p, direction);
+			change_striker(striker_p, striker_p->lftend, striker_p->rghtend);	 
 			drawLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend);
 		}
 
