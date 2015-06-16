@@ -161,7 +161,7 @@ void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
 		progressBall(ball);
 		checkWallCollision(ball,xmin,xmax,ymax,ymin);
 }
-//--------
+/*
 void createBox(box_t * box){ //Begyndelsen på createBox
 int height = 4;
 int width = 2;
@@ -181,3 +181,4 @@ int width = 2;
 				}
 			}
 		}
+*/
