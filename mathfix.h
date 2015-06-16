@@ -29,3 +29,4 @@ long cos(int n);
 void progressBall(struct Ball *ball);
 void checkWallCollision(struct Ball* ball,char xmin, char ymin, char xmax, char ymax );
 void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax );
+long round(long n);
