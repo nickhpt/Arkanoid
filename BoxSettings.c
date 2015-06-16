@@ -10,7 +10,7 @@ void setpwr(struct box_t *box_p) {
 
 } 
 
-void setBox(struct box_t *box_p, char xpos1, char ypos1,  char xpos2, char ypos2, char hp1, char point) {
+void setBox(struct box_t *box_p,unsigned char xpos1,unsigned char ypos1,unsigned char xpos2,unsigned char ypos2,unsigned char hp1,unsigned char point) {
 		box_p -> x1 = xpos1;
 		box_p -> y1 = ypos1; 
 		box_p -> x2 = xpos2;
@@ -22,7 +22,7 @@ void setBox(struct box_t *box_p, char xpos1, char ypos1,  char xpos2, char ypos2
 		
 } 
 
-void changehp(struct box_t *box_p, char change) {
+void changehp(struct box_t *box_p,unsigned char change) {
 	box_p->hp += change;
 	
 }
