@@ -1,5 +1,7 @@
 #include <eZ8.h>
 #include <sio.h>
+#include "ansi.h"
+
 
 
 struct TTime {
@@ -7,7 +9,7 @@ struct TTime {
 };
 
 #pragma interrupt
-void timer0int() ;
+void timer0int();
 
 //Initialiserer timeren
 void setTimer(); 
@@ -27,5 +29,8 @@ void setUpLDS();
 //Viser ouput på den ene søjle på D1 displayet
 void flashCounter(unsigned char counter);
 
+char returnflag();
+
+void set_flag0();
 
 
