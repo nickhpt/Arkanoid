@@ -48,3 +48,14 @@ void checkCollision(struct Ball *ball, struct striker_t *striker) {
 }
 
 //void updateBall(
+
+void moveBall(struct TVector *v, int n) {
+	long x1 = v->x; 
+	long y1 = v->y;
+	v->x = x+cos(n);
+	v->y = y+sin(n)
+
+	long afrundetX = round(v.x);
+	long afrundetY = round(v.y);
+
+	gotoxy(afrundetX,afrundetY); 
