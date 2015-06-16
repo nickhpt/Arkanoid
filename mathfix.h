@@ -17,9 +17,19 @@ struct Ball {
        long x;
 	   long y;
 	   struct TVector v;
+	   int angle;
 };
  
 void rotate(struct TVector *v, int n);
+void reflectBallRSidefromBelow(struct Ball *ball);
+void reflectBallRSidefromAbove(struct Ball *ball);
+void reflectBallLSidefromBelow(struct Ball *ball);
+void reflectBallLSidefromAbove(struct Ball *ball);
+void reflectBallTopfromRight(struct Ball *ball);
+void reflectBallTopfromLeft(struct Ball *ball);
+
+
+
 void reflectBallSides(struct TVector *v);
 void reflectBallTop(struct TVector *v);
 long expand(long i);
