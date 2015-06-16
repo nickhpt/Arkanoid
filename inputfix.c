@@ -11,7 +11,14 @@ void timer0int() {
 	flag++;
 } 
 
-//Initialiserer timeren
+char returnflag() {
+ return flag;
+}
+void set_flag0() {
+	flag = 0;
+}
+
+//Initialiserer timeren6
 void setTimer() {
 	DI();
 	// TEN = 0, TPOL = 0, PRES = 111, TMODE = 001 
@@ -56,7 +63,7 @@ char readKey() {
 			} else {
 				T0CTL |= 0x80;
 			}
-		}
+		} 
 		if (next & 0x02) {
 			gotoxy(x,y);
 			printf("%d:%02d:%02d.%02d",time.h,time.m,time.s,time.hs);
@@ -77,7 +84,7 @@ char readKey() {
 			printf("-:--:--.--");
 			gotoxy(x,y);
 			printf("-:--:--.--");
-	    }
+	    } 
 	}
 } */
 
@@ -122,5 +129,4 @@ void flashCounter(unsigned char counter) {
 	PEOUT |= 0x80;
 	PEOUT &= ~0x80;
 }
-
 
