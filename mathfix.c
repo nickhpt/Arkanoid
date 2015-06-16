@@ -115,6 +115,8 @@ void rotate(struct TVector *v, int n) {
     long y1 = v->y;
     v->x = x1*cos(n) - y1*sin(n);
     v->y = x1*sin(n) + y1*cos(n);
+	v->x = round(v->x);
+	v->y = round(v->y);
 
 }
 
@@ -140,6 +142,12 @@ void progressBall(struct Ball *ball) {
 	printf("o");
 }
 
+long round(long n) {
+	n = expand(n);
+	n = (n + 0x8000) >> 16;
+	return n;
+}
+
 
 
 // checking for ball collision with wall and ceiling
@@ -161,4 +169,3 @@ void updateBall(struct Ball* ball,char xmin, char ymin, char xmax, char ymax ) {
 		progressBall(ball);
 		checkWallCollision(ball,xmin,xmax,ymax,ymin);
 }
-
