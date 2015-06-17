@@ -110,11 +110,6 @@ long sin(int n) {
 long cos(int n) {
     return sin(n + 0x0080);
 }
-
-void changeDirection(struct TVector *v, int n) {
-	v->x = sin(n);
-	v->y = cos(n);
-}
  
 void rotate(struct TVector *v, int n) {
     long x1 = v->x;
