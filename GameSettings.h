@@ -63,5 +63,5 @@ void reflectBallStrikerfromRight(struct Ball *ball, struct striker_t *striker);
 
 void progressBall(struct Ball *ball);
 void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax );
-void updateBall(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax);
+void updateBall(struct Ball* ball,struct striker_t *striker,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax);
 
