@@ -5,6 +5,11 @@
 #include "mathfix.h"
 #include "GameSettings.h"
 
+void changeDirection(struct TVector *v, int n) {
+	v->x = sin(n);
+	v->y = cos(n);
+}
+
 void progressBall(struct Ball *ball) { 
 	gotoxy(round(ball->x),round(ball->y));
 	printf(" ");
@@ -94,7 +99,77 @@ void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,
 	}			
 }
 
-void updateBall(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
+void reflectBallStrikerfromLeft(struct Ball *ball, struct striker_t *striker) {
+	int n; 
+	if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + 2) ) {
+		n = ball->angle/2;
+		reflectBallBottomfromLeft(ball);
+		ball->angle -= n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+	else if( round(ball->y) >= (striker->lftend + 3) && round(ball->y) <= (striker->lftend + 5) ) {
+		n = ball->angle/3;
+		reflectBallBottomfromLeft(ball);
+		ball->angle -= n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+    else if( round(ball->y) >= (striker->lftend + 6) && round(ball->y) <= (striker->rghtend - 6) ) {
+		reflectBallBottomfromLeft(ball);
+	}
+	else if( round(ball->y) >= (striker->rghtend - 5) && round(ball->y) <= (striker->rghtend - 3) ) {
+		n = ball->angle/3;
+		reflectBallBottomfromLeft(ball);
+		ball->angle += n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+	else if( round(ball->y) >= (striker->rghtend - 2) && round(ball->y) <= striker->rghtend ) {
+		n = ball->angle/2;
+		reflectBallBottomfromLeft(ball);
+		ball->angle += n;
+		changeDirection(&(ball->v),ball->angle);
+	} 
+}
+
+void reflectBallStrikerfromRight(struct Ball *ball, struct striker_t *striker) {
+	int n; 
+	if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + 2) ) {
+		n = (256 - ball->angle) /2;
+		reflectBallBottomfromRight(ball);
+		ball->angle -= n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+	else if( round(ball->y) >= (striker->lftend + 3) && round(ball->y) <= (striker->lftend + 5) ) {
+		n = (256 - ball->angle) /3;
+		reflectBallBottomfromRight(ball);
+		ball->angle -= n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+    else if( round(ball->y) >= (striker->lftend + 6) && round(ball->y) <= (striker->rghtend - 6) ) {
+		reflectBallBottomfromRight(ball);
+	}
+	else if( round(ball->y) >= (striker->rghtend - 5) && round(ball->y) <= (striker->rghtend - 3) ) {
+		n = (256 - ball->angle) /3;
+		reflectBallBottomfromRight(ball);
+		ball->angle += n;
+		changeDirection(&(ball->v),ball->angle);
+	}
+	else if( round(ball->y) >= (striker->rghtend - 2) && round(ball->y) <= striker->rghtend ) {
+		n = (256 - ball->angle) /2;
+		reflectBallBottomfromRight(ball);
+		ball->angle += n;
+		changeDirection(&(ball->v),ball->angle);
+	} 
+}
+
+void updateBall(struct Ball* ball,struct striker_t *striker,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
+	if( round(ball->x + ball->v.x) == (striker->ypos - 1) ) {
+		if( ball->v.y > 0 ) { 
+			reflectBallStrikerfromLeft(ball,striker);
+   	    }
+		else if( ball->v.y < 0 ) {
+			reflectBallStrikerfromRight(ball,striker);
+		}
+	}
 	checkWallCollision(ball,xmin,xmax,ymax,ymin);
 	progressBall(ball);
 }
