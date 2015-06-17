@@ -214,7 +214,6 @@ void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char 
 }
 
 /*
-Startmenu indtil videre. 
 void drawStartGameBox() {
 
 unsigned char x1 = 25; unsigned char x2 = 30;
