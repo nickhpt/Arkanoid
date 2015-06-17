@@ -212,3 +212,39 @@ void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char 
 		printf(" ");
 	}
 }
+
+/*
+Startmenu indtil videre. 
+void drawStartGameBox() {
+
+unsigned char x1 = 25; unsigned char x2 = 30;
+unsigned char y1 = 25; unsigned char y2 = 50;
+char color = 1;
+
+   
+int x = ((x2-x1)/2)+x1;
+int y = ((y2-y1)/2)+y1-7; //Konstanten 7 så teksten står ordentligt 
+
+gotoxy(x,y);
+printf("1 to start game");
+drawBox(x1,y1,x2,y2,color);
+
+//printf("%d\n%d",x,y);
+}
+
+
+void drawSeeHiScoreBox() {
+int moveX = 10; //Bruges til at forskydde denne boks fra den forrige. 
+unsigned char x1 = 25+moveX; unsigned char x2 = 30+moveX;
+unsigned char y1 = 25; unsigned char y2 = 50;
+char color = 1;
+
+int x = ((x2-x1)/2)+x1;
+int y = ((y2-y1)/2)+y1-7;
+//printf("%d\n%d",x,y);
+
+gotoxy(x,y);
+printf("2 to see Hiscore");
+drawBox(x1,y1,x2,y2,color);
+}
+*/
