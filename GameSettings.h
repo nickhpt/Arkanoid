@@ -11,8 +11,7 @@ struct box_t {
 
 
 struct striker_t {
-	unsigned char lftend, rghtend;
-	unsigned char lftmid, center, rghtmid;												//The different zones of the striker
+	unsigned char lftend, rghtend;											//The different zones of the striker
 	unsigned char ypos;																	//leftend, leftmid, central, rightmid, rigthend
 	unsigned char points;
 	unsigned char lives;										
