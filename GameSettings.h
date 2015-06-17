@@ -37,6 +37,9 @@ void change_striker(struct striker_t * striker_p,unsigned char xpos1,unsigned ch
 
 void update_striker(struct striker_t * striker_p,unsigned char x1_wall,unsigned char x2_wall);
 
+struct TVector {
+      long x, y;
+};
 
 struct Ball {
        long x;
@@ -54,6 +57,9 @@ void reflectBallTopfromRight(struct Ball *ball);
 void reflectBallTopfromLeft(struct Ball *ball);
 void reflectBallBottomfromRight(struct Ball *ball);
 void reflectBallBottomfromLeft(struct Ball *ball);
+
+void reflectBallStrikerfromLeft(struct Ball *ball, struct striker_t *striker);
+void reflectBallStrikerfromRight(struct Ball *ball, struct striker_t *striker);
 
 void progressBall(struct Ball *ball);
 void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax );
