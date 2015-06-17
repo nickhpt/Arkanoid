@@ -5,57 +5,96 @@
 #include "mathfix.h"
 #include "GameSettings.h"
 
-void touch(struct Ball *ball) {
-	
+void progressBall(struct Ball *ball) { 
+	gotoxy(round(ball->x),round(ball->y));
+	printf(" ");
+	ball->x = ball->x + ball->v.x;
+	ball->y = ball->y + ball->v.y;  
+	gotoxy(round(ball->x),round(ball->y));
+	printf("o");
 }
 
-void reflectStrikerFromLeft(struct Ball *ball, struct striker_t *striker) {
-	reflectBallTop(&(ball->v));
-	if(ball->y == striker->lftend) {
-		rotate(&(ball->v),64);
-	}
-	else if(ball->y == striker->lftmid) {
-		rotate(&(ball->v),32);
-	}
-	else if(ball->y == striker->rghtmid) {
-		rotate(&(ball->v),-32);
-	}
-	else if(ball->y == striker->rghtend) {
-		rotate(&(ball->v),-64);
-	}
+void reflectBallRSidefromBelow(struct Ball *ball) {
+	int n = 512 - ball->angle;
+	ball->angle = 256 + n;
+	changeDirection(&(ball->v),ball->angle);	
 }
 
-void reflectStrikerFromRight(struct Ball *ball, struct striker_t *striker) {
-	reflectBallTop(&(ball->v));
-	if(ball->y == striker->rghtend) {
-		rotate(&(ball->v),64);
-	}
-	else if(ball->y == striker->rghtmid) {
-		rotate(&(ball->v),32);
-	}
-	else if(ball->y == striker->lftmid) {
-		rotate(&(ball->v),-32);
-	}
-	else if(ball->y == striker->lftend) {
-		rotate(&(ball->v),-64);
-	}
+void reflectBallRSidefromAbove(struct Ball *ball) {
+	ball->angle = 256 - ball->angle;
+	changeDirection(&(ball->v),ball->angle);
 }
 
-void checkCollision(struct Ball *ball, struct striker_t *striker) {
-	if(ball->v.x > 0 && ball->v.y > 0) {
-		
-	}
+void reflectBallLSidefromBelow(struct Ball *ball) {
+	int n = ball->angle - 256;
+	ball->angle = 512 - n;
+	changeDirection(&(ball->v),ball->angle);
 }
 
-//void updateBall(
+void reflectBallLSidefromAbove(struct Ball *ball) {
+	ball->angle = 256 - ball->angle;
+	changeDirection(&(ball->v),ball->angle);
+}
 
-void moveBall(struct TVector *v, int n) {
-	long x1 = v->x; 
-	long y1 = v->y;
-	v->x = x+cos(n);
-	v->y = y+sin(n)
+void reflectBallTopfromRight(struct Ball *ball) {
+	int n = ball->angle - 256;
+	ball->angle = 256 - n;
+	changeDirection(&(ball->v),ball->angle);
+}
 
-	long afrundetX = round(v.x);
-	long afrundetY = round(v.y);
+void reflectBallTopfromLeft(struct Ball *ball) {
+	ball->angle = 512 - ball->angle;
+    changeDirection(&(ball->v),ball->angle);
+}
 
-	gotoxy(afrundetX,afrundetY); 
+void reflectBallBottomfromRight(struct Ball *ball) {
+	int n = 256 - ball->angle;
+	ball->angle = 256 + n;
+	changeDirection(&(ball->v),ball->angle);
+}
+
+void reflectBallBottomfromLeft(struct Ball *ball) {
+	ball->angle = 512 - ball->angle;
+	changeDirection(&(ball->v),ball->angle);
+}
+ 
+// checking for ball collision with wall and ceiling
+void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax ) {
+	if(ball->v.x >= 0 && ball->v.y >= 0) {
+		if( round(ball->x + ball->v.x) == xmax) {
+			reflectBallBottomfromRight(ball);
+		}
+		if( round(ball->y + ball->v.y) == ymin) {
+			reflectBallRSidefromAbove(ball);
+		}
+	}
+	if(ball->v.x >= 0 && ball->v.y < 0) {
+		if( round(ball->x + ball->v.x) == xmax ) {
+			reflectBallBottomfromLeft(ball);
+		}
+		if( round(ball->y + ball->v.y) == ymax) {
+			reflectBallLSidefromAbove(ball);
+		}
+	}
+	if(ball->v.x < 0 && ball->v.y <= 0) {
+		if( round(ball->x + ball->v.x) == xmin ) {
+			reflectBallTopfromLeft(ball);
+		}
+		if( round(ball->y + ball->v.y) == ymax) {
+			reflectBallLSidefromBelow(ball);
+		}
+	}
+	if(ball->v.x < 0 && ball->v.y > 0) {
+		if( round(ball->x + ball->v.x) == xmin ) {
+			reflectBallTopfromRight(ball);
+		}
+		if( round(ball->y + ball->v.y) == ymin) {
+			reflectBallRSidefromBelow(ball);
+		}
+	}			
+}
+
+void updateBall(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
+	checkWallCollision(ball,xmin,xmax,ymax,ymin);
+	progressBall(ball);
+}
