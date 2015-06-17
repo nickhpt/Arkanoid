@@ -1,8 +1,10 @@
 #include <eZ8.h>
 #include <sio.h>
+#include <stdio.h>
 #include "ansi.h"
 #include "mathfix.h"
 #include "GameSettings.h"
+#include "inputfix.h"
 
 
 void setpwr(struct box_t *box_p) {
@@ -26,3 +28,35 @@ void changehp(struct box_t *box_p,unsigned char change) {
 	box_p->hp += change;
 	
 }
+
+void make_boxes(char boxarray[14][5]) {
+	char i, j;
+	unsigned char x1 = 2;
+	unsigned char y1 = 8;
+//	char length, width;
+	gotoxy(x1,y1);
+	for( i = 0; i < 14; i++) {
+		for( j = 0; j < 5; j++) {
+			
+			if(boxarray[i][j] == 1){
+				drawBox(x1, y1, x1 + 4, y1 + 16, 1);
+ 			     
+			} 
+			else if(boxarray[i][j] == 2) {
+				drawBox(x1, y1, x1 + 4, y1 + 16, 2);
+			}
+			else if(boxarray[i][j] == 3) {
+				drawBox(x1, y1, x1 + 4, y1 + 16, 3);
+			}
+			else if(boxarray[i][j] == 4) {
+				drawBox(x1, y1, x1 + 4, y1 + 16, 4);
+			}
+			else if(boxarray[i][j] == 5) {
+				drawBox(x1, y1, x1 + 4, y1 + 16, 5);
+			}
+			x1 += 5;
+		}
+		x1 = 2;
+		y1 += 17;
+	}
+} 
