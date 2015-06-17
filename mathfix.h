@@ -8,10 +8,6 @@
 extern const signed short SIN[512];
  
 #endif  // LUT_H
- 
-struct TVector {
-      long x, y;
-};
 
 void rotate(struct TVector *v, int n);
 long expand(long i);
