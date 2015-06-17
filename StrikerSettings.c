@@ -20,18 +20,12 @@ void initStriker(struct striker_t * striker_p,unsigned char xpos1,unsigned char 
 	striker_p -> points = 0;
 	striker_p -> lives = 3;
 	striker_p -> lftend = xpos1;
-	striker_p -> lftmid = striker_p -> lftend +1;
-	striker_p -> center = striker_p -> lftend + 2;
-	striker_p -> rghtmid = striker_p -> rghtend -1;
 	striker_p -> rghtend = xpos2;
 }
 
 void change_striker(struct striker_t * striker_p,unsigned char xpos1,unsigned char xpos2) {
 	striker_p -> lftend = xpos1;
 	striker_p -> rghtend = xpos2;
-	striker_p -> lftmid = striker_p -> lftend +1;
-	striker_p -> center = striker_p -> lftend + 2;
-	striker_p -> rghtmid = striker_p -> rghtend -1; 
 }
 
 void moveStriker(struct striker_t *striker_p,unsigned char direction) { 
