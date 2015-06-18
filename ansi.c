@@ -255,51 +255,80 @@ drawBox(x1,y1,x2,y2,color);
 //printf("%d\n%d",x,y);
 }
 
-
-/*
-StartMenu added der skal dog korrigeres lidt i skærmens størrelse. 
-Derudover skal der arbejdes på noget ACSII som teskt i boksene
-void drawSeeHiScoreBox() {
-int moveX = 10; //Bruges til at forskydde denne boks fra den forrige. 
-unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
-unsigned char y1 = 117; unsigned char y2 = 134;
-char color = 1;
-int foreground = 7; //int background = 2;
-
-int x = ((x2-x1)>> 1)+x1;
-int y = ((y2-y1)>> 1)+y1-7;
-printf("%d\n%d",x,y);
-
-gotoxy(x,y);
-fgcolor(foreground);
-printf("2 to see Hiscore");
-drawBox(x1,y1,x2,y2,color);
-
-}
-
-void drawSeePowerUps() {
-int moveX = 20; //Bruges til at forskydde denne boks fra den forrige. 
-unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
-unsigned char y1 = 117; unsigned char y2 = 134;
-char color = 1;
-int foreground = 7; //int background = 2;
-
-int x = ((x2-x1)>> 1)+x1;
-int y = ((y2-y1)>> 1)+y1-7;
-printf("%d\n%d",x,y);
-
-gotoxy(x,y);
-fgcolor(foreground);
-printf("3 to see Hiscore");
-drawBox(x1,y1,x2,y2,color);
-}
-
-
-
-void drawMenuWindow() {
-    unsigned char x1 = 3; unsigned char x2 = 50;
-    unsigned char y1 = 8; unsigned char y2 = 254;
-	char color = 2;
+void drawStartGameBox() {
+	unsigned char x1 = 15; unsigned char x2 = 20; 
+	unsigned char y1 = 117; unsigned char y2 = 134;
+	char color = 1;
+	   
+	int x = ((x2-x1)>> 1)+x1;
+	int y = ((y2-y1)>> 1)+y1-7; //Konstanten 7 så teksten står ordentligt 
+	
+	gotoxy(x,y);
+	printf("1 to start game");
 	drawBox(x1,y1,x2,y2,color);
+	
+	//printf("%d\n%d",x,y);
+	}
+	
+	
+	
+	void drawSeeHiScoreBox() {
+	int moveX = 10; //Bruges til at forskydde denne boks fra den forrige. 
+	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
+	unsigned char y1 = 117; unsigned char y2 = 134;
+	char color = 1;
+	int foreground = 7; //int background = 2;
+	
+	int x = ((x2-x1)>> 1)+x1;
+	int y = ((y2-y1)>> 1)+y1-7;
+	//printf("%d\n%d",x,y);
+	
+	gotoxy(x,y);
+	fgcolor(foreground);
+	printf("2 to see Hiscore");
+	drawBox(x1,y1,x2,y2,color);
+	
+	}
+	
+	void drawSeePowerUps() {
+	int moveX = 20; //Bruges til at forskydde denne boks fra den forrige. 
+	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
+	unsigned char y1 = 117; unsigned char y2 = 134;
+	char color = 1;
+	int foreground = 7; //int background = 2;
+	
+	int x = ((x2-x1)>> 1)+x1;
+	int y = ((y2-y1)>> 1)+y1-7;
+	printf("%d\n%d",x,y);
+	
+	gotoxy(x,y);
+	fgcolor(foreground);
+	printf("3 to see Hiscore");
+	drawBox(x1,y1,x2,y2,color);
+	}
+	
+	
+	
+	void drawMenuWindow() {
+	    unsigned char x1 = 3; unsigned char x2 = 50;
+	    unsigned char y1 = 8; unsigned char y2 = 254;
+		char color = 2;
+		drawBox(x1,y1,x2,y2,color);
+	}
+
+
+	void allowStartButtons() {
+	
+	char btn = readKey(); 
+
+	if (btn == 4) {
+	//start spil
+	}
+	if (btn == 1) {
+	printf("Der sker ingen ting");
+	while(1);
+	
+	}
 }
-*/
+
+
