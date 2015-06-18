@@ -213,6 +213,31 @@ void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char 
 	}
 }
 
+void drawBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, char color) {
+	unsigned char i, j;
+	gotoxy(x1,y1);
+	bgcolor(color);
+	for(i = x1; i < x2; i++) {
+		gotoxy(x1+i,y1);
+		for(j = y1; j < y2; j++) {
+			printf("%c",32);
+		}
+	}
+}
+
+void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {
+	unsigned char i, j;
+	gotoxy(x1,y1);
+	bgcolor(0);
+	for(i = x1; i < x2; i++) {
+		gotoxy(x1+i,y1);
+		for(j = y1; j < y2; j++) {
+			printf("%c",32);
+		}
+	}
+}
+
+
 void drawStartGameBox() {
 
 unsigned char x1 = 15; unsigned char x2 = 20; 
