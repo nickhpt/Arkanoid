@@ -124,3 +124,13 @@ long round(long n) {
 	return n;
 }
 
+char pwr(char a, char eksponent) {
+	int i, b = 1;
+	if(eksponent == 0)
+		return 1;
+	for(i = 0; i < eksponent; i++) {
+		b *= a;
+	}
+	return b;
+}
+
