@@ -299,7 +299,7 @@ void drawStartGameBox() {
 	
 	int x = ((x2-x1)>> 1)+x1;
 	int y = ((y2-y1)>> 1)+y1-7;
-	printf("%d\n%d",x,y);
+	//printf("%d\n%d",x,y);
 	
 	gotoxy(x,y);
 	fgcolor(foreground);
@@ -318,11 +318,9 @@ void drawStartGameBox() {
 
 
 	void allowStartButtons() {
-	
 	char btn = readKey(); 
-
 	if (btn == 4) {
-	//start spil
+	//start spil-----
 	}
 	if (btn == 1) {
 	printf("Der sker ingen ting");
