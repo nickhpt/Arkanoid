@@ -15,5 +15,6 @@ void printFix(long i);
 long sin(int n);
 long cos(int n);
 long round(long n);
+char pwr(char a, char eksponent);
 
 
