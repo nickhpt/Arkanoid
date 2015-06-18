@@ -20,3 +20,8 @@ void clearLine(unsigned char y1,unsigned char x1,unsigned char x2);
 void clearBox(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2);
 void drawBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, char color);
 void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2);
+void drawStartGameBox();
+void drawSeeHiScoreBox();
+void drawSeePowerUps();
+void drawMenuWindow();
+void allowStartButtons();
