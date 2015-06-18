@@ -11,6 +11,11 @@
 
 
 void main() {
+	drawStartGameBox();
+	drawSeeHiScoreBox();
+	drawSeePowerUps();
+	drawMenuWindow();
+	allowStartButtons();
 	char flag1;
 	struct striker_t striker;
 	unsigned char wallx1 = 1;
