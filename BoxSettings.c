@@ -53,9 +53,11 @@ void make_boxes(char boxarray[14][5]) {
 			else if(boxarray[i][j] == 5) {
 				drawBox2(x1, y1, x1 + 4, y1 + 16, 5);
 			}
-			x1 += 3;
+		//	x1 += 3;  						med mellemrum mellem kasserne:
+			x1 += 2;
 		}
 		x1 = 2;
-		y1 += 17;
+	//	y1 += 17;							med mellemrum mellem kasserne:
+		y1 += 16;
 	}
 }
