@@ -11,15 +11,16 @@ void changeDirection(struct TVector *v, int n) {
 }
 
 void progressBall(struct Ball *ball) { 
+	bgcolor(0);
 	gotoxy(round(ball->x),round(ball->y));
 	printf(" ");
 	ball->x = ball->x + ball->v.x;
 	ball->y = ball->y + ball->v.y;  
 	gotoxy(round(ball->x),round(ball->y));
-	printf("o");
+	printf("O");
 }
 
-void reflectBallRSide(struct Ball *ball) {
+void reflectBallSide(struct Ball *ball) {
 	ball->angle = 256 - ball->angle;
 	ball->angle %= 512;
 	changeDirection(&(ball->v),ball->angle);
@@ -49,10 +50,10 @@ void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,
 		reflectBallBottom(ball);
 	}
 	if( round(ball->y + ball->v.y) == ymin) {
-		reflectBallRSide(ball);
+		reflectBallSide(ball);
 	}
 	if( round(ball->y + ball->v.y) == ymax) {
-	reflectBallLSide(ball);
+		reflectBallSide(ball);
 	}
 	if( round(ball->x + ball->v.x) == xmin ) {
 		reflectBallTop(ball);
@@ -61,7 +62,7 @@ void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,
 
 void reflectBallStriker(struct Ball *ball, struct striker_t *striker) {
 	int n; 
-	if( ball->v.y > 0 ) {
+	if( ball->v.y >= 0 ) {
 		if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + 2) ) {
 			n = ball->angle/2;
 			reflectBallBottom(ball);
@@ -121,10 +122,29 @@ void reflectBallStriker(struct Ball *ball, struct striker_t *striker) {
 	} 
 }
 
-void updateBall(struct Ball* ball,struct striker_t *striker,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
+void boxImpact(struct Ball *ball, char *boxes) {
+	unsigned char i;
+	unsigned char x,y;
+	x = (round(ball->x + ball->v.x) - 4) / 4;
+    y = (round(ball->y + ball->v.y) - 8) / 16;
+	i = 14*x + y;
+	boxes += i;
+	if( (*boxes) && round(ball->x + ball->v.x) >= 2 && round(ball->x + ball->v.x) <= 22 && round(ball->y + ball->v.y) >= 8 && round(ball->y + ball->v.y) <= 232) {
+		(*boxes)--;
+		x *= 2;
+		x += 2;
+		y *= 16;
+		y += 8;
+		drawBox2(x,y,x+4,y+16,(*boxes));
+	}
+	bgcolor(0);
+}
+
+void updateBall(struct Ball* ball, struct striker_t *striker,char *boxes, unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
 	if( round(ball->x + ball->v.x) == (striker->ypos - 1) ) {
 		reflectBallStriker(ball,striker);
 	}
+	boxImpact(ball,boxes);
 	checkWallCollision(ball,xmin,xmax,ymax,ymin);
 	progressBall(ball);
 }
