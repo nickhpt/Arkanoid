@@ -64,5 +64,5 @@ void boxImpact(struct ball *ball, unsigned char *boxes[][]);
 
 void progressBall(struct Ball *ball);
 void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax );
-void updateBall(struct Ball* ball,struct striker_t *striker,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax);
+void updateBall(struct Ball* ball,struct striker_t *striker,char *boxes,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax);
 void make_boxes(char boxarray[14][5]);
