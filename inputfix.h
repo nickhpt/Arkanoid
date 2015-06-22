@@ -3,7 +3,6 @@
 #include "ansi.h"
 
 
-
 struct TTime {
 	char h, m, s, hs; 
 };
@@ -33,4 +32,6 @@ char returnflag();
 
 void set_flag0();
 
+void LEDinit();
 
+void LEDUpdate();
