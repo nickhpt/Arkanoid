@@ -49,18 +49,11 @@ struct Ball {
 };
  
 void changeDirection(struct TVector *v, int n);
-void reflectBallRSidefromBelow(struct Ball *ball);
-void reflectBallRSidefromAbove(struct Ball *ball);
-void reflectBallLSidefromBelow(struct Ball *ball);
-void reflectBallLSidefromAbove(struct Ball *ball);
-void reflectBallTopfromRight(struct Ball *ball);
-void reflectBallTopfromLeft(struct Ball *ball);
-void reflectBallBottomfromRight(struct Ball *ball);
-void reflectBallBottomfromLeft(struct Ball *ball);
+void reflectBallSide(struct Ball *ball);
+void reflectBallBottomTop(struct Ball *ball);
 
-void reflectBallStrikerfromLeft(struct Ball *ball, struct striker_t *striker);
-void reflectBallStrikerfromRight(struct Ball *ball, struct striker_t *striker);
-void boxImpact(struct ball *ball, unsigned char *boxes[][]);
+void reflectBallStriker(struct Ball *ball, struct striker_t *striker);
+void boxImpact(struct Ball *ball, char *boxes);
 
 void progressBall(struct Ball *ball);
 void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax );
