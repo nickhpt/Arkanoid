@@ -2,6 +2,8 @@
 #include <sio.h>
 #include "inputfix.h"
 #include "ansi.h"
+#include "heartarray.h"
+
 
 char flag = 0;
 
@@ -54,39 +56,6 @@ char readKey() {
 	return (PD3 >> 1) | (PF6 >> 5) | (PF7 >> 7);
 }
 
-//Håndterer input, når timer skal bruges
-/* void inputHandler(char present, char next, char x, char y) {
-	if(present < next) {
-		if(next & 0x01) {
-			if(T0CTL & 0x80) {
-				T0CTL &= ~0x80;
-			} else {
-				T0CTL |= 0x80;
-			}
-		} 
-		if (next & 0x02) {
-			gotoxy(x,y);
-			printf("%d:%02d:%02d.%02d",time.h,time.m,time.s,time.hs);
-		}
-		if (next & 0x04) {
-			gotoxy(x+1,y);
-			printf("%d:%02d:%02d.%02d",time.h,time.m,time.s,time.hs);
-		}
-		if (next == 0x06) {
-			T0CTL &= ~0x80;
-			time.hs = 0;
-			time.s = 0;
-			time.m = 0;
-			time.h = 0;
-			gotoxy(x-1,y);
-			printf("%d:%02d:%02d.--",time.h,time.m,time.s);
-			gotoxy(x+1,y);
-			printf("-:--:--.--");
-			gotoxy(x,y);
-			printf("-:--:--.--");
-	    } 
-	}
-} */
 
 //Kan bruges til at finde rising edge
 char detectPush(char present, char next) {
@@ -130,3 +99,80 @@ void flashCounter(unsigned char counter) {
 	PEOUT &= ~0x80;
 }
 
+void LEDinit() {
+     
+    //Sætter hele port E til output
+    PEADDR = 0x01;
+    PECTL = 0x00;
+    PEADDR = 0x00;
+     
+    //Sætter hele port G til output
+    PGADDR = 0x01;
+    PGCTL = 0x00;
+    PGADDR = 0x00;
+ 
+    //Timer0 sættes
+    DI();
+    // TEN = 0, TPOL = 0, PRES = 111, TMODE = 001 
+    T0CTL = 0x039;
+    // Den højeste nibbel sættes til 0
+    T0H = 0x000;
+    // Den laveste nibbel sættes til 1
+    T0L = 0x001;
+    //Dette er reload values, som er opdelt i høj og lav
+    T0RH = 0x00;
+    T0RL = 0x48;
+     
+    // Interrupt prioriteten sættes
+    IRQ0ENH &= ~0x20; //Low priority 
+    IRQ0ENL |= 0x20;
+   SET_VECTOR(TIMER0,timer0int);
+     
+    //Timeren enables
+    T0CTL |= 0x80;
+ 
+    //Interrput enables
+    EI();   
+}
+
+void LEDUpdate() {
+    static char digit, column, scroll=0;
+    if(flag == 1){
+          PEOUT = 0x1F & ~(1 << (4-column)); 
+     	  PGOUT = *(&heartarray1[0] + column);
+      
+    //    PGOUT = *(&vidbuff[0][0] + digit*6 + column + scroll);
+ 
+        switch(digit){
+            case 0:
+                PEOUT &= ~(1 << 7);
+                PEOUT |=  (1 << 7);
+                PEOUT &= ~(1 << 7);
+                break;
+            case 1:
+                PGOUT &= ~(1 << 7);
+                PGOUT |=  (1 << 7);
+                PGOUT &= ~(1 << 7);
+                break;
+            case 2:
+                PEOUT &= ~(1 << 5);
+                PEOUT |=  (1 << 5);
+                PEOUT &= ~(1 << 5);
+                break;
+            case 3:
+                PEOUT &= ~(1 << 6);
+                PEOUT |=  (1 << 6);
+                PEOUT &= ~(1 << 6);
+                break; 
+        }
+     
+     
+        if(++digit == 4){
+            digit = 0;
+            if(++column == 5){
+                column = 0;
+            }
+        }
+        flag = 0;
+    }
+}
