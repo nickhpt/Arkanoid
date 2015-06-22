@@ -3,6 +3,7 @@
 #include "ansi.h"
 
 
+
 struct TTime {
 	char h, m, s, hs; 
 };
@@ -28,10 +29,11 @@ void setUpLDS();
 //Viser ouput på den ene søjle på D1 displayet
 void flashCounter(unsigned char counter);
 
+void LEDinit();
+void LEDUpdate(char lives);
+
 char returnflag();
 
 void set_flag0();
 
-void LEDinit();
 
-void LEDUpdate();
