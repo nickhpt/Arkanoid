@@ -327,6 +327,19 @@ void drawStartGameBox() {
 	while(1);
 	
 	}
+	
+	*/
+	void main(){
+init_uart(_UART0,_DEFFREQ,_DEFBAUD);
+
+drawStartGameBox();
+drawSeeHiScoreBox();
+drawSeePowerUps();
+drawMenuWindow();
+allowStartButtons();
+
+while(1);
+/*
 }
 
 
