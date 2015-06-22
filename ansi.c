@@ -238,22 +238,6 @@ void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned ch
 }
 
 
-void drawStartGameBox() {
-
-unsigned char x1 = 15; unsigned char x2 = 20; 
-unsigned char y1 = 117; unsigned char y2 = 134;
-char color = 1;
-
-   
-int x = ((x2-x1)>> 1)+x1;
-int y = ((y2-y1)>> 1)+y1-7; //Konstanten 7 så teksten står ordentligt 
-
-gotoxy(x,y);
-printf("1 to start game");
-drawBox(x1,y1,x2,y2,color);
-
-//printf("%d\n%d",x,y);
-}
 
 void drawStartGameBox() {
 	unsigned char x1 = 15; unsigned char x2 = 20; 
@@ -328,7 +312,7 @@ void drawStartGameBox() {
 	
 	}
 	
-	*/
+	/* Main method for startmenu
 	void main(){
 init_uart(_UART0,_DEFFREQ,_DEFBAUD);
 
@@ -339,7 +323,7 @@ drawMenuWindow();
 allowStartButtons();
 
 while(1);
-/*
+*/
 }
 
 
