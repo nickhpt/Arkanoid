@@ -10,7 +10,7 @@ char flag = 0;
 //Interrupt for timeren
  #pragma interrupt
 void timer0int() {
-	flag++;
+	flag = 1;
 } 
 
 char returnflag() {
@@ -135,7 +135,7 @@ void LEDinit() {
     EI();   
 }
 
-void LEDUpdate() {
+void LEDUpdate(char lives) {
     static char digit, column, scroll=0;
     if(flag == 1){
           PEOUT = 0x1F & ~(1 << (4-column)); 
@@ -167,7 +167,7 @@ void LEDUpdate() {
         }
      
      
-        if(++digit == 4){
+        if(++digit == lives){
             digit = 0;
             if(++column == 5){
                 column = 0;

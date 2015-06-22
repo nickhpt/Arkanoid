@@ -1,7 +1,6 @@
 #include <eZ8.h>
 #include <sio.h>
 #include "ansi.h"
-#include "mathfix.h"
 #include "GameSettings.h"
 #include "inputfix.h"
 
@@ -18,9 +17,18 @@ void setStriker(struct striker_t *striker_p, unsigned char xpos1,unsigned char x
 void initStriker(struct striker_t * striker_p,unsigned char xpos1,unsigned char xpos2,unsigned char ypos1) {
 	striker_p -> ypos = ypos1;
 	striker_p -> points = 0;
-	striker_p -> lives = 3;
+	striker_p -> lives = 4;
 	striker_p -> lftend = xpos1;
 	striker_p -> rghtend = xpos2;
+	drawLine(ypos1, xpos1, xpos2);
+}
+
+void setStriker1(struct striker_t *striker_p, unsigned char xpos1,unsigned char xpos2,unsigned char ypos1) {
+	striker_p -> ypos = ypos1;
+	striker_p -> lftend = xpos1;
+	striker_p -> rghtend = xpos2;
+	drawLine(ypos1,xpos1,xpos2);
+
 }
 
 void change_striker(struct striker_t * striker_p,unsigned char xpos1,unsigned char xpos2) {
@@ -43,8 +51,6 @@ void scorepoints(struct striker_t *striker_p,unsigned char point) {
 }
 
 void update_striker(struct striker_t * striker_p,unsigned char x1_wall, unsigned char x2_wall) {
-	unsigned char flag = returnflag();
-	if(flag) {
 		unsigned char direction = 0;
 		unsigned char check = readKey();
 	
@@ -62,7 +68,4 @@ void update_striker(struct striker_t * striker_p,unsigned char x1_wall, unsigned
 			change_striker(striker_p, striker_p->lftend, striker_p->rghtend);	 
 			drawLine(striker_p-> ypos, striker_p->lftend, striker_p->rghtend);
 		}
-
-		 set_flag0();
-	}
 }
