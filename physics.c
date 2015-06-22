@@ -26,19 +26,7 @@ void reflectBallSide(struct Ball *ball) {
 	changeDirection(&(ball->v),ball->angle);
 }
 
-void reflectBallLSide(struct Ball *ball) {
-	ball->angle = 256 - ball->angle;
-	ball->angle %= 512;
-	changeDirection(&(ball->v),ball->angle);
-}
-
-void reflectBallTop(struct Ball *ball) {
-	ball->angle = 512 - ball->angle;
-	ball->angle %= 512;
-    changeDirection(&(ball->v),ball->angle);
-}
-
-void reflectBallBottom(struct Ball *ball) {
+void reflectBallBottomTop(struct Ball *ball) {
 	ball->angle = 512 - ball->angle;
 	ball->angle %= 512;
 	changeDirection(&(ball->v),ball->angle);
@@ -46,76 +34,71 @@ void reflectBallBottom(struct Ball *ball) {
  
 // checking for ball collision with wall and ceiling
 void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax ) {
-	if( round(ball->x + ball->v.x) == xmax) {
-		reflectBallBottom(ball);
+	if( round(ball->x + ball->v.x) == xmax || round(ball->x + ball->v.x) == xmin ) {
+		reflectBallBottomTop(ball);
 	}
-	if( round(ball->y + ball->v.y) == ymin) {
+	if( round(ball->y + ball->v.y) == ymin || round(ball->y + ball->v.y) == ymax ) {
 		reflectBallSide(ball);
-	}
-	if( round(ball->y + ball->v.y) == ymax) {
-		reflectBallSide(ball);
-	}
-	if( round(ball->x + ball->v.x) == xmin ) {
-		reflectBallTop(ball);
 	}		
 }
 
 void reflectBallStriker(struct Ball *ball, struct striker_t *striker) {
 	int n; 
+	unsigned char length = (striker->rghtend - striker->lftend) / 5;
 	if( ball->v.y >= 0 ) {
-		if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + 2) ) {
+		if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + length - 1) ) {
 			n = ball->angle/2;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle -= n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-		else if( round(ball->y) >= (striker->lftend + 3) && round(ball->y) <= (striker->lftend + 5) ) {
+		else if( round(ball->y) >= (striker->lftend + length) && round(ball->y) <= (striker->lftend + 2 * length - 1) ) {
 			n = ball->angle/3;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle -= n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-	    else if( round(ball->y) >= (striker->lftend + 6) && round(ball->y) <= (striker->rghtend - 6) ) {
-			reflectBallBottom(ball);
+	    else if( round(ball->y) >= (striker->lftend + 2 * length) && round(ball->y) <= (striker->rghtend - 2 * length) ) {
+			reflectBallBottomTop(ball);
 		}
-		else if( round(ball->y) >= (striker->rghtend - 5) && round(ball->y) <= (striker->rghtend - 3) ) {
+		else if( round(ball->y) >= (striker->rghtend - 2 * length - 1) && round(ball->y) <= (striker->rghtend - length) ) {
 			n = ball->angle/3;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle += n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-		else if( round(ball->y) >= (striker->rghtend - 2) && round(ball->y) <= striker->rghtend ) {
+		else if( round(ball->y) >= (striker->rghtend - length - 1) && round(ball->y) <= striker->rghtend ) {
 			n = ball->angle/2;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle += n;
 			changeDirection(&(ball->v),ball->angle);
 		} 
 	}
 	else if ( ball->v.y < 0 ) {
-		if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + 2) ) {
+		if( round(ball->y) >= striker->lftend && round(ball->y) <= (striker->lftend + length - 1) ) {
 			n = (256 - ball->angle) /2;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle -= n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-		else if( round(ball->y) >= (striker->lftend + 3) && round(ball->y) <= (striker->lftend + 5) ) {
+		else if( round(ball->y) >= (striker->lftend + length) && round(ball->y) <= (striker->lftend + 2 * length - 1) ) {
 			n = (256 - ball->angle) /3;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle -= n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-	    else if( round(ball->y) >= (striker->lftend + 6) && round(ball->y) <= (striker->rghtend - 6) ) {
-			reflectBallBottom(ball);
+	    else if( round(ball->y) >= (striker->lftend + 2 * length) && round(ball->y) <= (striker->rghtend - 2 * length) ) {
+			reflectBallBottomTop(ball);
 		}
-		else if( round(ball->y) >= (striker->rghtend - 5) && round(ball->y) <= (striker->rghtend - 3) ) {
+		else if( round(ball->y) >= (striker->rghtend - 2 * length - 1) && round(ball->y) <= (striker->rghtend - length) ) {
 			n = (256 - ball->angle) /3;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle += n;
 			changeDirection(&(ball->v),ball->angle);
 		}
-		else if( round(ball->y) >= (striker->rghtend - 2) && round(ball->y) <= striker->rghtend ) {
+		else if( round(ball->y) >= (striker->rghtend - length - 1) && round(ball->y) <= striker->rghtend ) {
 			n = (256 - ball->angle) /2;
-			reflectBallBottom(ball);
+			reflectBallBottomTop(ball);
 			ball->angle += n;
 			changeDirection(&(ball->v),ball->angle);
 		} 	
@@ -129,19 +112,26 @@ void boxImpact(struct Ball *ball, char *boxes) {
     y = (round(ball->y + ball->v.y) - 8) / 16;
 	i = 14*x + y;
 	boxes += i;
-	if( (*boxes) && round(ball->x + ball->v.x) >= 2 && round(ball->x + ball->v.x) <= 22 && round(ball->y + ball->v.y) >= 8 && round(ball->y + ball->v.y) <= 232) {
+	if( (*boxes) && (((round(ball->x + ball->v.x) >= 2) && (round(ball->x + ball->v.x) <= 23) && (round(ball->y + ball->v.y) >= 8) &&
+ 		(round(ball->y + ball->v.y) <= 231))) ) {
 		(*boxes)--;
-		x *= 2;
-		x += 2;
+		x *= 4;
+		x += 4;
 		y *= 16;
 		y += 8;
-		drawBox2(x,y,x+4,y+16,(*boxes));
+		drawBox2(x,y,x + 4,y+16,(*boxes));
+		if( round(ball->y + ball->v.y) == y || round(ball->y + ball->v.y) == (y + 15) ) {
+			reflectBallSide(ball);
+		}
+		else if( round(ball->x  + ball->v.x) == x || round(ball->x + ball->v.x) == (x + 3) ) {
+			reflectBallBottomTop(ball);
+		}
 	}
 	bgcolor(0);
 }
 
 void updateBall(struct Ball* ball, struct striker_t *striker,char *boxes, unsigned char xmin,unsigned char ymin,unsigned char xmax,unsigned char ymax) {
-	if( round(ball->x + ball->v.x) == (striker->ypos - 1) ) {
+	if( round(ball->x + ball->v.x) == (striker->ypos) ) {
 		reflectBallStriker(ball,striker);
 	}
 	boxImpact(ball,boxes);
