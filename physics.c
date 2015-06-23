@@ -5,6 +5,7 @@
 #include "mathfix.h"
 #include "GameSettings.h"
 
+//This function initializes the ball to have the position x = 27, y = 127
 void initBall(struct Ball *ball) {
 	ball->x = (1<<14) * 27;
 	ball->y = (1<<14) * 127;
@@ -12,11 +13,13 @@ void initBall(struct Ball *ball) {
 	changeDirection(&(ball->v),ball->angle);
 }
 
+//This function changes the direction of the ball
 void changeDirection(struct TVector *v, int n) {
 	v->x = sin(n);
 	v->y = cos(n);
 }
 
+//Deletes the old ball and prints the new ball
 void progressBall(struct Ball *ball) { 
 	bgcolor(0);
 	gotoxy(round(ball->x),round(ball->y));
@@ -27,6 +30,7 @@ void progressBall(struct Ball *ball) {
 	printf("O");
 }
 
+//Reflects the ball verti
 void reflectBallSide(struct Ball *ball) {
 	ball->angle = 256 - ball->angle;
 	ball->angle %= 512;
@@ -156,6 +160,41 @@ void boxImpact(struct Ball *ball, char *boxes, struct striker_t *striker, unsign
 		}
 	}
 	bgcolor(0);
+}
+
+void checkFailure(struct Ball *ball, struct striker_t *striker,unsigned char left, unsigned char right, unsigned char yposs) {
+	if(round(ball->x) > 57) {
+		striker->lives--;
+		if(striker->lives == 0) {
+			PEOUT = 0x1F;
+			PGOUT = 0x00;
+			PEOUT |= 0x80;
+			PEOUT &= ~0x80;
+		}
+		else if(striker->lives == 1) {
+			PEOUT = 0x1F;
+			PGOUT = 0x00;
+			PGOUT |= 0x80;
+			PGOUT &= ~0x80;
+		}
+		else if(striker->lives == 2) {
+			PEOUT = 0x1F;
+			PGOUT = 0x00;
+			PEOUT |= 0x20;
+			PEOUT &= ~0x20;
+		}
+		else if(striker->lives == 3) {
+			PEOUT = 0x1F;
+			PGOUT = 0x00;
+			PEOUT |= 0x40;
+			PEOUT &= ~0x40;
+		}
+		clearLine(striker->ypos,striker->lftend,striker->rghtend);
+		gotoxy(ball->x,ball->y);
+		printf(" ");
+		setStriker1(striker,left,right,yposs);
+		initBall(ball);
+	}
 }
 
 void updateBall(struct Ball* ball, struct striker_t *striker,char *boxes, unsigned char xmin,unsigned char ymin,unsigned char xmax,

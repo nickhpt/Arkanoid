@@ -238,7 +238,7 @@ void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned ch
 
 void drawStartGameBox() {
 	unsigned char x1 = 15; unsigned char x2 = 20; 
-	unsigned char y1 = 117; unsigned char y2 = 134;
+	unsigned char y1 = 117; unsigned char y2 = 136;
 	char color = 1;
 	   
 	int x = ((x2-x1)>> 1)+x1;
@@ -261,7 +261,6 @@ void drawStartGameBox() {
 	
 	int x = ((x2-x1)>> 1)+x1;
 	int y = ((y2-y1)>> 1)+y1-7;
-	//printf("%d\n%d",x,y);
 	
 	gotoxy(x,y);
 	fgcolor(foreground);
@@ -273,7 +272,7 @@ void drawStartGameBox() {
 	void drawSeePowerUps() {
 	int moveX = 20; //Bruges til at forskydde denne boks fra den forrige. 
 	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
-	unsigned char y1 = 117; unsigned char y2 = 134;
+	unsigned char y1 = 117; unsigned char y2 = 136;
 	char color = 1;
 	int foreground = 7; 
 	
