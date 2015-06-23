@@ -236,6 +236,11 @@ void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned ch
 	}
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
 void drawStartGameBox() {
 	unsigned char x1 = 15; unsigned char x2 = 20; 
 	unsigned char y1 = 117; unsigned char y2 = 134;
@@ -296,3 +301,21 @@ void drawStartGameBox() {
 		drawBox(x1,y1,x2,y2,color);
 	}
 
+<<<<<<< HEAD
+=======
+
+	void allowStartButtons() {
+	char btn = readKey(); 
+	if (btn == 4) {
+	//start spil-----
+	}
+	if (btn == 1) {
+	printf("Der sker ingen ting");
+	while(1);
+	
+	}
+	
+	
+
+
+>>>>>>> origin/master
