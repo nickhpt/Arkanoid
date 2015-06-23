@@ -24,6 +24,3 @@ void drawStartGameBox();
 void drawSeeHiScoreBox();
 void drawSeePowerUps();
 void drawMenuWindow();
-void allowStartButtons();
-
-
