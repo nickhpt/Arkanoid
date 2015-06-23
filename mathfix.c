@@ -133,4 +133,3 @@ char pwr(char a, char eksponent) {
 	}
 	return b;
 }
-

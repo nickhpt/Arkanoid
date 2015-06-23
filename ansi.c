@@ -3,6 +3,7 @@
 #include <string.h>		     // For strlen() function 
 
 #include "ansi.h"
+
  
 #define ESC 0x1B
  
@@ -173,7 +174,6 @@ void drawBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y
 		printf("%c",196);
 	}
 	printf("%c",217);
-	fgcolor(0);
 }
 
 void drawLine(unsigned char y1,unsigned char x1,unsigned char x2) {
@@ -215,10 +215,9 @@ void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char 
 
 void drawBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, char color) {
 	unsigned char i, j;
-	gotoxy(x1,y1);
 	bgcolor(color);
 	for(i = x1; i < x2; i++) {
-		gotoxy(x1+i,y1);
+		gotoxy(i,y1);
 		for(j = y1; j < y2; j++) {
 			printf("%c",32);
 		}
@@ -232,27 +231,9 @@ void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned ch
 	for(i = x1; i < x2; i++) {
 		gotoxy(x1+i,y1);
 		for(j = y1; j < y2; j++) {
-			printf("%c",32);
+			printf(" ");
 		}
 	}
-}
-
-
-void drawStartGameBox() {
-
-unsigned char x1 = 15; unsigned char x2 = 20; 
-unsigned char y1 = 117; unsigned char y2 = 134;
-char color = 1;
-
-   
-int x = ((x2-x1)>> 1)+x1;
-int y = ((y2-y1)>> 1)+y1-7; //Konstanten 7 så teksten står ordentligt 
-
-gotoxy(x,y);
-printf("1 to start game");
-drawBox(x1,y1,x2,y2,color);
-
-//printf("%d\n%d",x,y);
 }
 
 void drawStartGameBox() {
@@ -261,15 +242,14 @@ void drawStartGameBox() {
 	char color = 1;
 	   
 	int x = ((x2-x1)>> 1)+x1;
-	int y = ((y2-y1)>> 1)+y1-7; //Konstanten 7 så teksten står ordentligt 
+	int y = ((y2-y1)>> 1)+y1-7; //Konstanten 7 s� teksten st�r ordentligt 
 	
 	gotoxy(x,y);
-	printf("1 to start game");
+	printf("PF7 to start game");
 	drawBox(x1,y1,x2,y2,color);
 	
 	//printf("%d\n%d",x,y);
 	}
-	
 	
 	
 	void drawSeeHiScoreBox() {
@@ -277,7 +257,7 @@ void drawStartGameBox() {
 	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
 	unsigned char y1 = 117; unsigned char y2 = 134;
 	char color = 1;
-	int foreground = 7; //int background = 2;
+	int foreground = 7; 
 	
 	int x = ((x2-x1)>> 1)+x1;
 	int y = ((y2-y1)>> 1)+y1-7;
@@ -295,7 +275,7 @@ void drawStartGameBox() {
 	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
 	unsigned char y1 = 117; unsigned char y2 = 134;
 	char color = 1;
-	int foreground = 7; //int background = 2;
+	int foreground = 7; 
 	
 	int x = ((x2-x1)>> 1)+x1;
 	int y = ((y2-y1)>> 1)+y1-7;
@@ -315,31 +295,4 @@ void drawStartGameBox() {
 		char color = 2;
 		drawBox(x1,y1,x2,y2,color);
 	}
-
-
-	void allowStartButtons() {
-	char btn = readKey(); 
-	if (btn == 4) {
-	//start spil-----
-	}
-	if (btn == 1) {
-	printf("Der sker ingen ting");
-	while(1);
-	
-	}
-	
-	*/
-	void main(){
-init_uart(_UART0,_DEFFREQ,_DEFBAUD);
-
-drawStartGameBox();
-drawSeeHiScoreBox();
-drawSeePowerUps();
-drawMenuWindow();
-allowStartButtons();
-
-while(1);
-/*
-}
-
 
