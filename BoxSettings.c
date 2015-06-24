@@ -111,7 +111,7 @@ const char velkommen[19][16]  ={
 
 void main(){
 
-	printf("%c",velkommen[10][10]);
+	// void drawWelcome();
 
 	while(1);
 
@@ -121,7 +121,7 @@ void main(){
 //Header Filen:
 #include <eZ8.h>
 #include <sio.h>
-
+drawWelcome();
 extern const char velkommen[19][16];
 
 //Metoden der kan printe arrayet
