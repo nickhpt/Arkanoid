@@ -53,6 +53,7 @@ void checkWallCollision(struct Ball* ball,unsigned char xmin,unsigned char ymin,
 	}		
 }
 
+// reflects when hitting the striker
 void reflectBallStriker(struct Ball *ball, struct striker_t *striker) {
 	int n; 
 	unsigned char length = (striker->rghtend - striker->lftend) / 5;
@@ -116,6 +117,7 @@ void reflectBallStriker(struct Ball *ball, struct striker_t *striker) {
 	} 
 }
 
+// reflect pattern for hitting a box
 void boxImpact(struct Ball *ball, char *boxes, struct striker_t *striker, unsigned char oldx) {
 	unsigned char i;
 	unsigned char x,y;
@@ -162,6 +164,7 @@ void boxImpact(struct Ball *ball, char *boxes, struct striker_t *striker, unsign
 	bgcolor(0);
 }
 
+// function to check for a fail - a loss of life
 void checkFailure(struct Ball *ball, struct striker_t *striker,unsigned char left, unsigned char right, unsigned char yposs) {
 	if(round(ball->x) > 57) {
 		striker->lives--;
@@ -197,6 +200,7 @@ void checkFailure(struct Ball *ball, struct striker_t *striker,unsigned char lef
 	}
 }
 
+// function to update the ball
 void updateBall(struct Ball* ball, struct striker_t *striker,char *boxes, unsigned char xmin,unsigned char ymin,unsigned char xmax,
 				unsigned char ymax, unsigned char oldx) {
 	if( round(ball->x + ball->v.x) == (striker->ypos) ) {
