@@ -107,7 +107,7 @@ const char velkommen[19][16]  ={
 
 #include <eZ8.h>
 #include <sio.h>
-#include "ascii.h"
+#include "ansi.h"
 
 void main(){
 
@@ -121,6 +121,8 @@ void main(){
 //Header Filen:
 #include <eZ8.h>
 #include <sio.h>
+#include "ansi.h"
+
 drawWelcome();
 extern const char velkommen[19][16];
 
