@@ -10,7 +10,7 @@
 #include <sio.h>             // special encore serial i/o routine
 #include "mathFix.h"
 #include "ansi.h"
-#include "GameSettings.h"
+
 // -----------------------------------------------------------------------
 // SIN: a 512 long LUT of 16bit values in 2.14 format
 // sin(x*pi/256)
@@ -111,25 +111,9 @@ long cos(int n) {
     return sin(n + 0x0080);
 }
  
-void rotate(struct TVector *v, int n) {
-    long x1 = v->x;
-    long y1 = v->y;
-    v->x = x1*sin(n) - y1*cos(n);
-    v->y = x1*cos(n) + y1*sin(n);  
-}
 
 long round(long n) {
 	n = expand(n);
 	n = (n + 0x8000) >> 16;
 	return n;
-}
-
-char pwr(char a, char eksponent) {
-	int i, b = 1;
-	if(eksponent == 0)
-		return 1;
-	for(i = 0; i < eksponent; i++) {
-		b *= a;
-	}
-	return b;
 }
