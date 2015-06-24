@@ -193,7 +193,7 @@ void checkFailure(struct Ball *ball, struct striker_t *striker,unsigned char lef
 			PEOUT &= ~0x40;
 		}
 		clearLine(striker->ypos,striker->lftend,striker->rghtend);
-		gotoxy(ball->x,ball->y);
+		gotoxy(round(ball->x),round(ball->y));
 		printf(" ");
 		setStriker1(striker,left,right,yposs);
 		initBall(ball);
