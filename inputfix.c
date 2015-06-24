@@ -57,13 +57,6 @@ char readKey() {
 }
 
 
-//Kan bruges til at finde rising edge
-char detectPush(char present, char next) {
-	if ( (((present || next) && (!present || !next))) && next)
-        return 1;
-	else 
-		return 0;
-}
 
 //Initialiserer display D1 (unit0), søjle 1 (den længste til venstre)
 void setUpLDS() {
@@ -91,13 +84,7 @@ void setUpLDS() {
 	PGOUT &= ~0x80;	
 }
 
-//Viser ouput på den ene søjle på D1 displayet
-void flashCounter(unsigned char counter) {
-	PGOUT &= ~0x7F;
-    PGOUT |= counter & 0x7F;
-	PEOUT |= 0x80;
-	PEOUT &= ~0x80;
-}
+
 
 void LEDinit() {
      
@@ -140,8 +127,6 @@ void LEDUpdate(char lives) {
     if(flag == 1){
           PEOUT = 0x1F & ~(1 << (4-column)); 
      	  PGOUT = *(&heartarray1[0] + column);
-      
-    //    PGOUT = *(&vidbuff[0][0] + digit*6 + column + scroll);
  
         switch(digit){
             case 0:
