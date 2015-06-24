@@ -8,17 +8,7 @@
 #define ESC 0x1B
  
 void fgcolor(int foreground) {
-/*  Value      foreground     Value     foreground
-    ------------------------------------------------
-      0        Black            8       Dark Gray
-      1        Red              9       Light Red
-      2        Green           10       Light Green
-      3        Brown           11       Yellow
-      4        Blue            12       Light Blue
-      5        Purple          13       Light Purple
-      6        Cyan            14       Light Cyan
-      7        Light Gray      15       White
-*/
+
   int type = 22;             // normal text
     if (foreground > 7) {
       type = 1;                // bold text
@@ -28,24 +18,7 @@ void fgcolor(int foreground) {
 }
  
 void bgcolor(int background) {
-/* IMPORTANT:   When you first use this function you cannot get back to true white background in HyperTerminal.
-   Why is that? Because ANSI does not support true white background (ANSI white is gray to most human eyes).
-                The designers of HyperTerminal, however, preferred black text on white background, which is why
-                the colors are initially like that, but when the background color is first changed there is no
-                  way comming back.
-   Hint:        Use resetbgcolor(); clrscr(); to force HyperTerminal into gray text on black background.
- 
-    Value      Color      
-    ------------------
-      0        Black
-      1        Red
-      2        Green
-      3        Brown
-      4        Blue
-      5        Purple
-      6        Cyan
-      7        Gray
-*/
+
   printf("%c[%dm", ESC, background+40);
 }
  
@@ -64,43 +37,50 @@ void resetbgcolor() {
 	printf("%c[m", ESC);  
 }
  
-void clrscr() { //clear screen
+//Clears screen with last background color
+void clrscr() { 
 	printf("%c[2J",ESC);
 }
   
-void clreol() { //clear to end of line
+//Clears to the end of the line
+void clreol() { 
 	printf("%c[K",ESC);
 }
  
+// Goes to (x,y)-coordinates
 void gotoxy(unsigned char x,unsigned char y) {
 	printf("%c[%d;%dH",ESC,x,y);
 }
  
-void underline(char on) { //underlines characters
-	  if(on != 0) {
+//Underlines characters
+void underline(char on) { 
+	  if(on) {
 	     printf("%c[04m",ESC);
 	  } else {
 	     printf("%c[24m",ESC);
 	  }
 }
  
-void reverse(char on) { //Reverses foreground and background colors
-	   if(on != 0) {
+//Reverses the background and foreground colors
+void reverse(char on) { 
+	   if(on) {
 	     printf("%c[07m",ESC);
 	   } else {
 	     printf("%c[27m",ESC);
 	   }
 }
  
-void blink(char on) { //Makes text blink
-	  if(on != 0) {
+//Makes the text blink
+void blink(char on) {
+	  if(on) {
 	  	printf("%c[05m",ESC);
 	  } else {
 	  	printf("%c[25m",ESC);
 	  }
 }
  
-void window(char x1, char y1, char x2, char y2, char* s, char style) {//Draws a window with (x1,y1) and (x2,y2) coordinates and writes the string s at the top
+//Draws a window with (x1,y1) and (x2,y2) coordinates and writes the string s at the top
+void window(char x1, char y1, char x2, char y2, char* s, char style) {
 	char i;
 	char n = strlen(s);
 	gotoxy(x1,y1);
@@ -127,6 +107,7 @@ void window(char x1, char y1, char x2, char y2, char* s, char style) {//Draws a 
 	printf("%c",217);
 }
 
+//Draws a box with the bottom line missing
 void drawBoxX4(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2) {
 	unsigned char i;
 	bgcolor(0);
@@ -144,6 +125,7 @@ void drawBoxX4(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char 
 	}
 }
 
+//Draws a simple box with upper left corner in (x1,y1) and lower right corner (x2,y2)
 void drawBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y2,unsigned char color) {
 	unsigned char i;
 	if(color == 5) 
@@ -176,6 +158,7 @@ void drawBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y
 	printf("%c",217);
 }
 
+//Draws a simple line at the depth y1, from x1 to x2
 void drawLine(unsigned char y1,unsigned char x1,unsigned char x2) {
 	unsigned char i;
 	bgcolor(4);
@@ -185,6 +168,7 @@ void drawLine(unsigned char y1,unsigned char x1,unsigned char x2) {
 	}
 }
 
+//Clears line at depth y1 from x1 to x2
 void clearLine(unsigned char y1,unsigned char x1, unsigned char x2) {
 	unsigned char i;
 	gotoxy(y1,x1);
@@ -194,6 +178,7 @@ void clearLine(unsigned char y1,unsigned char x1, unsigned char x2) {
 	}
 }
 
+//Removes a box with upper left corner in (x1,y1) and lower right corner in (x1,y2)
 void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char y2) {
 	unsigned char i;
 	gotoxy(y1,x1);
@@ -213,6 +198,7 @@ void clearBox(unsigned char x1, unsigned char y1,unsigned char x2,unsigned char 
 	}
 }
 
+//Draws a compact box with upper left corner in (x1,y1) and lower right corner (x2,y2)
 void drawBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, char color) {
 	unsigned char i, j;
 	bgcolor(color);
@@ -224,6 +210,7 @@ void drawBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned cha
 	}
 }
 
+//Clears a compact box with upper left corner in (x1,y1) and lower right corner (x2,y2)
 void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {
 	unsigned char i, j;
 	gotoxy(x1,y1);
@@ -236,9 +223,10 @@ void clearBox2(unsigned char x1, unsigned char y1, unsigned char x2, unsigned ch
 	}
 }
 
+//Draws one of the startmenu windows
 void drawStartGameBox() {
 	unsigned char x1 = 15; unsigned char x2 = 20; 
-	unsigned char y1 = 117; unsigned char y2 = 136;
+	unsigned char y1 = 117; unsigned char y2 = 138;
 	char color = 1;
 	   
 	int x = ((x2-x1)>> 1)+x1;
@@ -248,14 +236,13 @@ void drawStartGameBox() {
 	printf("PF7 to start game");
 	drawBox(x1,y1,x2,y2,color);
 	
-	//printf("%d\n%d",x,y);
 	}
 	
-	
-	void drawSeeHiScoreBox() {
+//Draws the second of the startmenu windows
+void drawSeeHelp() {
 	int moveX = 10; //Bruges til at forskydde denne boks fra den forrige. 
 	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
-	unsigned char y1 = 117; unsigned char y2 = 134;
+	unsigned char y1 = 117; unsigned char y2 = 138;
 	char color = 1;
 	int foreground = 7; 
 	
@@ -264,34 +251,18 @@ void drawStartGameBox() {
 	
 	gotoxy(x,y);
 	fgcolor(foreground);
-	printf("2 to see Hiscore");
+	printf("PF6 to see help");
 	drawBox(x1,y1,x2,y2,color);
 	
-	}
+}
 	
-	void drawSeePowerUps() {
-	int moveX = 20; //Bruges til at forskydde denne boks fra den forrige. 
-	unsigned char x1 = 15+moveX; unsigned char x2 = 20+moveX;
-	unsigned char y1 = 117; unsigned char y2 = 136;
-	char color = 1;
-	int foreground = 7; 
 	
-	int x = ((x2-x1)>> 1)+x1;
-	int y = ((y2-y1)>> 1)+y1-7;
-	//printf("%d\n%d",x,y);
 	
-	gotoxy(x,y);
-	fgcolor(foreground);
-	printf("3 to see Hiscore");
+//Draws the frame of the startmenu
+void drawMenuWindow() {
+    unsigned char x1 = 3; unsigned char x2 = 50;
+    unsigned char y1 = 8; unsigned char y2 = 254;
+	char color = 2;
 	drawBox(x1,y1,x2,y2,color);
-	}
-	
-	
-	
-	void drawMenuWindow() {
-	    unsigned char x1 = 3; unsigned char x2 = 50;
-	    unsigned char y1 = 8; unsigned char y2 = 254;
-		char color = 2;
-		drawBox(x1,y1,x2,y2,color);
-	}
+}
 

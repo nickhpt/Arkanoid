@@ -17,14 +17,10 @@
 
 
 void main() {
-   	char level11[14][5];
-	char level22[14][5];
-	char level33[14][5];
+   	char level[14][5];
 	unsigned char i,j;
-	int points1 = 1400, points2 = 2800, points3 = 4650;
-	//int points1 = 200, points2 = 200, points3 = 200;
-	char lives, progression = 0;
-	char flag1;
+	int points1, points2, points3;
+	char progression = 0;
 	char check;
 	unsigned char oldx = 0;
 	
@@ -39,15 +35,14 @@ void main() {
 	setTimer();
 	LEDinit();
 	drawStartGameBox();
-	drawSeeHiScoreBox();
-	drawSeePowerUps();
+	drawSeeHelp();
 	drawMenuWindow();
 	while(1) {
 		check = readKey();
 		if ( check & 0x02) {
 			bgcolor(0);
 			clrscr();
-			drawBox(15,110,30,157,7);
+			drawBox(20,110,27,160,7);
 			gotoxy(22,112);
 			printf("This is our version of the arkonoid game");
 			gotoxy(23,112);
@@ -62,23 +57,54 @@ void main() {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
-					drawSeeHiScoreBox();
-					drawSeePowerUps();
+					drawSeeHelp();
 					drawMenuWindow();
 					break;
 				}
 			}
 		} 
 		if ( check & 0x01) {
+			bgcolor(0);
+			clrscr();
+			drawBox(20,110,27,157,7);
+			gotoxy(22,112);
+			printf("Choose difficulty:");
+			gotoxy(23,112);
+			printf("PF7 for easy-mode");
+			gotoxy(24,112);
+			printf("PF6 for medium-mode");
+			gotoxy(25,112);
+			printf("PD3 for hard-mode, clear all boxes");
+			while(1) {
+				check = readKey();
+				if(check & 0x04) {
+					points1 = 1400;
+				 	points2 = 2800;
+				 	points3 = 4650;
+					break;	
+				}
+				else if(check & 0x02) {
+					points1 = 1000;
+					points2 = 1800;
+					points3 = 3000;
+					break;
+				}
+				else if (check & 0x01) {
+					points1 = 500;
+					points2 = 900;
+					points3 = 1500;
+					break;
+				}
+			}
 			for(i = 0; i < 14; i++) {
 				for(j = 0; j < 5; j++) {
-					level11[i][j] = level1[i][j];
+					level[i][j] = level1[i][j];
 				}
 			}
 			clrscr();
 			fgcolor(15);
 			drawBoxX4(wallx1,1,59,wallx2);
-			make_boxes(level11);
+			make_boxes(level);
 			initStriker(&striker, left, right, yposs);
 			gotoxy(3,241);
 			printf("%d",points1);
@@ -86,7 +112,7 @@ void main() {
 				LEDUpdate(striker.lives);
 				if(returnflag()) {
 					update_striker(&striker, wallx1 , wallx2);
-					updateBall(&b,&striker,&level11[0][0],wallx1, 1, wallx2, 59, oldx);
+					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
 				oldx = b.x;
@@ -95,8 +121,7 @@ void main() {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
-					drawSeeHiScoreBox();
-					drawSeePowerUps();
+					drawSeeHelp();
 					drawMenuWindow();
 					striker.lives = 4;
 					break;	
@@ -110,20 +135,23 @@ void main() {
 		if (progression & 0x01) {
 			for(i = 0; i < 14; i++) {
 				for(j = 0; j < 5; j++) {
-					level22[i][j] = level2[i][j];
+					level[i][j] = level2[i][j];
 				}
 			}
 			clrscr();
 			fgcolor(15);
 			drawBoxX4(wallx1,1,59,wallx2);
-			make_boxes(level22);
+			make_boxes(level);
 			initBall(&b);
 			setStriker1(&striker,left,right,yposs);
+			striker.points = 0;
+			gotoxy(3,241);
+			printf("%d",points2);
 			while(1) {
 				LEDUpdate(striker.lives);
 				if(returnflag()) {
 					update_striker(&striker, wallx1 , wallx2);
-					updateBall(&b,&striker,&level22[0][0],wallx1, 1, wallx2, 59, oldx);
+					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
 				oldx = b.x;
@@ -132,14 +160,13 @@ void main() {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
-					drawSeeHiScoreBox();
-					drawSeePowerUps();
+					drawSeeHelp();
 					drawMenuWindow();
 					striker.lives = 4;
 					progression = 0;
 					break;	
 				}
-				if ((striker.points - points1) == points2) {
+				if (striker.points == points2) {
 					progression++;
 					break;
 				}
@@ -148,20 +175,23 @@ void main() {
 		if (progression & 0x02) {
 			for(i = 0; i < 14; i++) {
 				for(j = 0; j < 5; j++) {
-					level33[i][j] = level3[i][j];
+					level[i][j] = level3[i][j];
 				}
 			}
 			clrscr();
 			fgcolor(15);
 			drawBoxX4(wallx1,1,59,wallx2);
-			make_boxes(level33);
+			make_boxes(level);
 			initBall(&b);
 			setStriker1(&striker,left,right,yposs);
+			striker.points = 0;
+			gotoxy(3,241);
+			printf("%d",points3);
 			while(1) {
 				LEDUpdate(striker.lives);
 				if(returnflag()) {
 					update_striker(&striker, wallx1 , wallx2);
-					updateBall(&b,&striker,&level33[0][0],wallx1, 1, wallx2, 59, oldx);
+					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
 				oldx = b.x;
@@ -170,14 +200,13 @@ void main() {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
-					drawSeeHiScoreBox();
-					drawSeePowerUps();
+					drawSeeHelp();
 					drawMenuWindow();
 					striker.lives = 4;
 					progression = 0;
 					break;	
 				}
-				if ((striker.points - points1 - points2) == points3) {
+				if (striker.points == points3) {
 					progression *= 2;
 					break;
 				}
@@ -186,7 +215,7 @@ void main() {
 		if (progression & 0x04) {
 			bgcolor(0);
 			clrscr();
-			drawBox(20,109,26,145,7);
+			drawBox(20,109,26,148,7);
 			gotoxy(22,112);
 			printf("Congratulation!");
 			gotoxy(23,112);
@@ -199,9 +228,9 @@ void main() {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
-					drawSeeHiScoreBox();
-					drawSeePowerUps();
+					drawSeeHelp();
 					drawMenuWindow();
+					initBall(&b);
 					striker.lives = 4;
 					progression = 0;
 					break;	
