@@ -5,7 +5,7 @@
 #include "heartarray.h"
 
 
-char flag = 0;
+static char flag = 0;
 
 //Interrupt for timeren
  #pragma interrupt
@@ -55,35 +55,6 @@ char readKey() {
 
 	return (PD3 >> 1) | (PF6 >> 5) | (PF7 >> 7);
 }
-
-
-
-//Initialiserer display D1 (unit0), søjle 1 (den længste til venstre)
-void setUpLDS() {
-
-	//Sætter hele port E til output
-	PEADDR = 0x01;
-	PECTL = 0x00;
-	PEADDR = 0x00;
-	
-	//Sætter hele port G til output
-	PGADDR = 0x01;
-	PGCTL = 0x00;
-	PGADDR = 0x00;
-	
-	//Sætter port E til 00001111 og
-	//port G til 00000000
-	PEOUT = 0x0F;
-	PGOUT = 0x00;
-
-	//Laver klokkerne, dvs. E: 00001111 -> 11101111 -> 00001111 og
-	//G: 00000000 -> 10000000 -> 00000000
-	PEOUT |= 0xE0;
-	PGOUT |= 0x80;
-	PEOUT &= ~0xE0;
-	PGOUT &= ~0x80;	
-}
-
 
 
 void LEDinit() {
