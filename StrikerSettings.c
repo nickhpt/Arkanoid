@@ -12,7 +12,7 @@ void setStriker(struct striker_t *striker_p, unsigned char xpos1,unsigned char x
 	striker_p -> lftend = xpos1;
 	striker_p -> rghtend = xpos2;
 	printf("dfdfdf");
-}
+	}
 
 void initStriker(struct striker_t * striker_p,unsigned char xpos1,unsigned char xpos2,unsigned char ypos1) {
 	striker_p -> ypos = ypos1;
@@ -42,13 +42,6 @@ void moveStriker(struct striker_t *striker_p,unsigned char direction) {
 
 }
 
-void changelives(struct striker_t *striker_p) {
-	striker_p ->lives--;
-}
-
-void scorepoints(struct striker_t *striker_p,unsigned char point) {
-	striker_p -> points += point;
-}
 
 void update_striker(struct striker_t * striker_p,unsigned char x1_wall, unsigned char x2_wall) {
 		unsigned char direction = 0;
