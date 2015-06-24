@@ -123,3 +123,15 @@ void main(){
 #include <sio.h>
 
 extern const char velkommen[19][16];
+
+//Metoden der kan printe arrayet
+
+void drawWelcome(){
+	int i; int j;
+	for (i = 0; i < 17; i++){
+		for (j = 0; j < 20; j++){
+			printf("%c",velkommen[i][j]);
+		}
+	}
+	
+}
