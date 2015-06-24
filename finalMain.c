@@ -221,10 +221,10 @@ void main() {
 			gotoxy(23,112);
 			printf("You've won the game");
 			gotoxy(24,112);
-			printf("Press PD3 to leave to startmenu");
+			printf("Press PF6 to leave to startmenu");
 			while (1) {
 				check = readKey();
-				if (check & 0x04) {
+				if (check & 0x02) {
 					bgcolor(0);
 					clrscr();
 					drawStartGameBox();
