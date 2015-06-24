@@ -9,12 +9,10 @@ extern const signed short SIN[512];
  
 #endif  // LUT_H
 
-void rotate(struct TVector *v, int n);
 long expand(long i);
 void printFix(long i);
 long sin(int n);
 long cos(int n);
 long round(long n);
-char pwr(char a, char eksponent);
 
 
