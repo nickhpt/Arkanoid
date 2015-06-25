@@ -115,7 +115,7 @@ void main() {
 					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
-				oldx = b.x;
+				oldx = round(b.x);
 				checkFailure(&b,&striker,left,right,yposs);
 				if( !striker.lives ) {
 					bgcolor(0);
@@ -154,7 +154,7 @@ void main() {
 					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
-				oldx = b.x;
+				oldx = round(b.x);
 				checkFailure(&b,&striker,left,right,yposs);
 				if( !striker.lives ) {
 					bgcolor(0);
@@ -194,7 +194,7 @@ void main() {
 					updateBall(&b,&striker,&level[0][0],wallx1, 1, wallx2, 59, oldx);
 					set_flag0();
 				}
-				oldx = b.x;
+				oldx = round(b.x);
 				checkFailure(&b,&striker,left,right,yposs);
 				if( !striker.lives ) {
 					bgcolor(0);
